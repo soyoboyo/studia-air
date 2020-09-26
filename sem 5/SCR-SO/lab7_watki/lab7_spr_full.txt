@@ -1,0 +1,65 @@
+SCR-SO, lab 7, środa 7:30
+Jacek Zalewski, 218598
+data lab: 15.11.2017
+data oddania:
+
+
+
+program 1:
+1.1 W której zmiennej przechowywana jest liczba producentów?
+nthreads = min(atoi(argv[2]), MAXNTHREADS);
+
+1.2 W jaki sposób producenci wypełniają tablice shared.buff?
+shared.buff[shared.nput] = shared.nval;
+
+1.3 Kiedy tablica shared.buff jest wypełniona prawidłowo?
+shared.buff[i] != i
+
+1.4 Jaka funkcja jest odpowiedzialna za tworzenie nowych wątków?
+Pthread_create(&tid_produce[i], NULL, produce, &count[i]);
+
+1.5 Do czego służą i w jaki sposób są modyfikowane zmienne shared.nput i shared.nval?
+
+1.6 Która funkcja realizuje producentów, a która konsumenta?
+producenci: void *produce(void*), konsumenci: void *consume(void*)
+
+1.7 Za co są odpowiedzialne funkcje Set_concurrency i Pthread_join?
+
+Co może być powodem tego, że suma wartości komórek tablicy count, na powyższym przykładzie, przekracza wartość nitems (inaczej: dlaczego liczba cykli pracy poszczególnych producentów przekracza liczbę wytwarzanych produktów)? 
+
+
+
+
+
+program 2:
+Czy w serii eksperymentów pojawił się wynik, taki że suma wartości komórek tablicy count, jest różna od wartości nitems?
+Wyjaśnij poczynione obserwacje. 
+
+count[0] = 630
+count[1] = 202
+count[2] = 479
+count[3] = 0
+count[4] = 41760
+count[5] = 0
+count[6] = 0
+count[7] = 0
+count[8] = 0
+count[9] = 6929
+
+
+program 3:
+Uruchom kilka razy zmodyfikowane programy prodcons2 i prodcons3 z identycznymi parametrami nitems i nthreads np. równymi odpowiednio 300000 i 8.
+Wyjaśnij poczynione obserwacje. 
+
+program 4:
+Uruchom kilka razy zmodyfikowane programy prodcons3 i prodcons4 z identycznymi parametrami nitems i nthreads np. równymi odpowiednio 300000 i 8.
+Wyjaśnij poczynione obserwacje. 
+
+
+program 5:
+
+
+program 6:
+Opisz mechanizm odpowiedzialny za krótszy czas wykonywania się (przyjmniej teoretycznie) programu prodcons6 względem programu prodcons5. 
+
+

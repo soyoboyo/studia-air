@@ -1,0 +1,151 @@
+SCR-SO, lab 3, środa 7:30
+Jacek Zalewski, 218598
+data lab: 18.10.2017
+data oddania: 13.10.2017
+
+=============================================================================
+Zadanie 1 - ps
+Polecenie: Zapoznaj się z programem ps (man ps). Wypróbuj dwa formaty wyświetlania rozszerzonych infomracji: -f i -l. Naucz się wybierać zestaw procesów do wyświetlania argumentami opcjonalnymi -u, -t, i -p.
+
+różnica między ps -l, a ps -f: ps -l pokazyje kilka dodatkowych kolumn (np. priotity i nice)
+
+a) Ile Twoich procesów istniało w systemie w chwili przykładowego wywołania ps? 
+Odp.: Dwa
+  PID TTY          TIME CMD
+ 9146 pts/4    00:00:00 bash
+21514 pts/4    00:00:00 ps
+
+b) Ile procesów sshd istniało w systemie (serwerze) w chwili wykonywania ćwiczenia (sprawdź polecenie pgrep)? 
+Odp.: 0
+
+=============================================================================
+Zadanie 2. - procesy osierocone
+Zostały napisane 3 skrypty: A.sh, B.sh, C.sh, gdzie A uruchamia B i B uruchamia C. Po zabiciu procesu skrytpu B, rodzicem procesu C stał się terminal. Poniżej procesy pokazane z parametrem --forest (bo zabiciu procesu B)
+
+przed:
+jacek     1416   782  lis11 ?        00:00:05  \_ /usr/lib/gnome-terminal/gnome-t
+jacek     1425  1416  lis11 pts/0    00:00:00      \_ bash
+jacek     3200  1425  13:08 pts/0    00:00:00      |   \_ sh A.sh
+jacek     3201  3200  13:08 pts/0    00:00:00      |       \_ sh B.sh
+jacek     3202  3201  13:08 pts/0    00:00:00      |           \_ sh C.sh
+jacek     3203  3202  13:08 pts/0    00:00:00      |               \_ sleep 1000
+
+po:
+jacek     1416   782  lis11 ?        00:00:07  \_ /usr/lib/gnome-terminal/gnome-t
+jacek     1425  1416  lis11 pts/0    00:00:00  |   \_ bash
+jacek     3200  1425  13:08 pts/0    00:00:00  |   |   \_ sh A.sh
+jacek     3264  3200  13:10 pts/0    00:00:00  |   |       \_ sleep 1000
+jacek     3202   782  13:08 pts/0    00:00:00  \_ sh C.sh
+jacek     3203  3202  13:08 pts/0    00:00:00      \_ sleep 1000
+
+jeden ze skryptów - A.sh (wszystkie są prawie identyczne)
+#!/bin/bash
+sh B.sh
+sleep 1000
+
+=============================================================================
+Zadanie 3. - 
+uruchomiono potok 3 poleceń 
+sleep 60 | sleep 60 | sleep 60
+
+jacek     4245  4234  13:22 pts/0    00:00:00 bash
+jacek     5939  4245  13:35 pts/0    00:00:00 sleep 60
+jacek     5940  4245  13:35 pts/0    00:00:00 sleep 60
+jacek     5941  4245  13:35 pts/0    00:00:00 sleep 60
+
+wniosek: wszystkie mają tego samego rodzica
+
+=============================================================================
+Zadanie 4. 
+tworzenie potoku FIFO o nazwie "potok": mknod potok p 
+
+w terminalu 1 wpisano poleceni: cat > potok
+w terminalu 2, 3 i 4 wpisano polecenie: cat potok
+
+w terminalu wpisywano kolejno liczby 1, 2, 3 ... itd.
+
+rezultat
+terminal 2 wyświetlał liczby nieparzyste
+terminal 3 wyswietlał liczby parzyste
+terminal 4 nic nie wyświetlił
+
+ważne: zabicie potoku, z którego piszemy zabija też wszyskie odczytujące
+
+=============================================================================
+Zadanie 5. - trap
+poniżej znajduje się skrypt wypisujący co sekundę aktualną datę i godzinę, jest w nim także przechwytywanie 15 podstawowych sygnałów
+oczywiście sygnału SIGKILL (-9) nie da się przechwycić, mimo ustawienia pułapki w skrypcie
+
+#!/bin/bash
+
+trap 'echo "SIGHUP trap"' 1
+trap 'echo "SIGINT trap"' 2
+trap 'echo "SIGQUIT trap"' 3
+trap 'echo "SIGILL trap"' 4
+trap 'echo "SIGTRAP trap"' 5
+trap 'echo "SIGHABRT trap"' 6
+trap 'echo "SIGBUS trap"' 7
+trap 'echo "SIGFPE trap"' 8
+trap 'echo "SIGKILL trap"' 9 # tutaj to i tak nic nie da
+trap 'echo "SIGUSR1 trap"' 10
+trap 'echo "SIGSEGV trap"' 11
+trap 'echo "SIGUSR2 trap"' 12
+trap 'echo "SIGPIPE trap"' 13
+trap 'echo "SIGALRM trap"' 14
+trap 'echo "SIGTERM trap"' 15
+
+echo "Current time and date:" 
+while :
+do
+  date "+%H:%M:%S %d/%m/%y" &
+  sleep 1 
+done
+
+=============================================================================
+Zadanie 6.
+polecenie fg (foreground) powoduje że proces działa na "pierwszym planie"
+polecenie bg (background) powoduje, że proces działa w tle 
+
+polecenie 'kill -SIGCONT PID' jest bardziej podobne do polecenia bg
+
+skrypt użyty do eksperymentów:
+
+#!/bin/bash
+i=0
+while :
+do
+  i=$((i+1))
+  echo $i
+  sleep 1
+done
+
+=============================================================================
+Zadanie 7 - ulimit
+poleceniam 'ulimit -u 5' został ustawiony limit procesów użytkownika na 5
+*(oczywiście jest tam o wiele więcej parametrów które można ustawiać, można je wyświetlić poleceniem ulimit -a)
+
+przy próbie zrobienia czegokolwiek cyklicznie pojawia się komunikat:
+bash: fork: retry: Resource temporarily unavailable
+
+skrypt do zapchania procesami
+
+#!/bin/bash
+fun(){ fun | fun & };
+fun
+
+wywołanie skryptu powoduje, że po chwili wyświetla sią komunikat
+Cannot fork: PID - gdzie PID odnosi się do skryptu
+
+aby opanować sytuację należy użyć ctrl+C
+
+=============================================================================
+Zadanie 8. - nice
+polecenie uruchamia skrypt/program z podaną wartością nice
+nice -n 10 zad37.sh 
+
+polecenie do zmiany wartości nice dla istniejącego już procesu
+renice -n 10 -p PID 
+gdzie PID to PID procesu
+
+ważne: aby ustawić wartość nice mniejszą niż 0, trzeba dodatkowo użyć polecenia sudo
+

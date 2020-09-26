@@ -1,0 +1,356 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Unix/Linux - cwiczenia wprowadzajace</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Refresh" content="3600">
+<script type="text/javascript" src="http://ff.kis.v2.scr.kaspersky-labs.com/1C15FB7F-4483-384F-882D-5D87625C668F/main.js" charset="UTF-8"></script></head>
+
+<body>
+<h1> Zapoznanie się z systemem Unix </h1>
+
+<ol>
+
+
+<li> System plików Unixa i polecenia na katalogach:
+
+<pre>
+  cd
+  ls
+  ls -l
+  ls -a
+  ls -1
+  man ls
+  mkdir podkatalog
+  ls -l
+  cd podkatalog
+  cd ..
+  rmdir podkatalog
+  cd /
+  ls -l
+  cd /etc
+  ls
+  ls -ltr
+  ls -l *.conf
+  ls -l *.?
+  ls -ld *.?
+</pre>
+<p/>
+</li>
+
+
+<li> Operacje na plikach:
+
+<pre>
+  cd $HOME
+  touch pusty
+  cp pusty drugi
+  mv drugi drugipusty
+  ls -l
+  rm pusty drugipusty
+  cat /etc/termcap
+
+  less /etc/termcap
+   i polecenia wewnętrzne programu less:
+     SPACE              - pełny ekran do przodu
+     b                  - pełny ekran do tyłu
+     j                  - wiersz w dół
+     k                  - wiersz w górę
+     G                  - na koniec pliku
+     g                  - na początek pliku
+     h                  - pomoc: sumaryczne zestawienie poleceń
+     /string            - przeszukiwanie do przodu
+     n                  - przeszukiwanie dalej
+     ?string            - przeszukiwanie do tyłu
+     N                  - przeszukiwanie dalej w drugą stronę
+  ls -l /etc | less
+  man less
+</pre>
+<p/>
+</li>
+
+
+<li> Prawa dostępu do plików - pierwsze kroki:
+
+<pre>
+  cd $HOME
+  echo proba > probny_plik
+  chmod -r probny_plik
+  ls -l probny_plik
+  cat probny_plik
+  chmod u+r probny_plik
+  ls -l probny_plik
+  cat probny_plik
+  chmod go-rwx probny_plik
+  ls -l probny_plik
+</pre>
+<p/>
+</li>
+
+
+<li> Operacje na procesach:
+
+<pre>
+  ps
+  ps -e
+  ps -ef
+  ps -ef | less
+  ps -el
+  man ps
+  top
+</pre>
+<p/>
+</li>
+
+
+<li> Kasowanie procesów:
+
+<pre>
+  kill pid
+  kill -9 pid
+  kill -9 -1              # uwaga - to jest polecenie samobójcze
+</pre>
+<p/>
+</li>
+
+
+<li> Uzyskiwanie informacji o użytkownikach włączonych do systemu:
+
+<pre>
+  who
+  finger
+</pre>
+<p/>
+</li>
+
+
+<li> Uzyskiwanie informacji o historii wlaczen do systemu:
+
+<pre>
+  last
+  last | less
+</pre>
+<p/>
+</li>
+
+
+<li> Uzyskiwanie informacji o istniejących kontach użytkowników:
+
+<pre>
+  cat /etc/passwd                # plik kont
+  niscat passwd.org_dir          # baza danych kont - może nie istnieć
+  ldaplist passwd                # inna baza danych - też może nie istnieć
+</pre>
+<p/>
+</li>
+
+
+<li> Proste skrypty<br/>
+
+Utwórz plik z poleceniami demonstrującymi podstawowe operacje na
+plikach: tworzenie pliku i katalogu, zmienianie nazwy, praw dostępu,
+linkowanie, kasowanie pliku, itp.  Uruchamiaj plik jako skrypt, czyli:
+<pre>
+sh nazwa-pliku
+</pre>
+Wypróbuj opcję śledzenia wykonania poleceń w pliku (set -x).
+<p/>
+</li>
+
+
+<li> Dalsze ćwiczenia ze skryptami<br/>
+
+Zmodyfikuj napisany przykładowy skrypt tak by wykonywał operacje na
+swoich argumentach: $1, $2, $3, ...
+
+Jeśli skrypt wykonuje operacje na plikach, to spróbuj przerobić go
+tak, żeby dla każdego argumentu zadawał pytanie (poleceniem echo), czy
+wykonać daną operację czy nie.  Następnie wywołaj skrypt z argumentem
+w postaci *.c i sprawdź czy poprawnie działa na wszystkich plikach
+pasujących do napisanego wyrażenia.
+<p/>
+</li>
+
+
+<li> Program find<br/>
+
+Program find służy do &ldquo;znajdowania&rdquo; na dysku komputera plików
+spełniających określone warunki.  Program nie ma interfejsu graficznego,
+lecz język w jakim można te warunki określać jest niezwykle bogaty i mocny.
+Warto nauczyć się posługiwać programem find przynajmniej w minimalnym stopniu.
+
+Spróbuj pojedynczym wywołaniem find znaleźć w katalogu /etc: pliki o rozmiarze
+do 1kB utworzone w ciągu ostatnich 3 dni, oraz pliki nie większe niż 250 kB,
+utworzone nie mniej niż miesiąc, ale nie więcej niż trzy miesiące temu (dla
+uproszczenia: 30 i 90 dni temu).
+
+WSKAZÓWKA: zacznij od wyszukiwania plików z pojedynczymi kryteriami
+wyszukiwania, upewnij się, że dobrze je rozumiesz i stosujesz, oraz uzyskujesz  
+prawidłowe wyniki.  Następnie połącz kryteria wyszukiwania.  W bardziej
+zaawansowanych przypadkach mogą być do tego przydatne operatory logiczne -a i
+-o jak również nawiasy \( \).
+<p/>
+</li>
+
+
+<li>Program tar<br/>
+
+Zapoznaj się z programem tar i przećwicz archiwizowanie z jego pomocą najpierw
+kilku plików, a następnie struktury katalogów.  Przećwicz odtwarzanie, zarówno
+całej zarchiwizowanej struktury, w tym z powrotem do pierwotnej lokalizacji w
+systemie plików, jak i w inne miejsce, oraz wybiórczo, pojedynczych plików.
+Sprawdź czy pliki i katalogi zostały kompletnie i wiernie odtworzone.  Zwróć
+uwagę, jak zapisywane są w archiwum pliki/katalogi zadane z pełną, bezwzględną
+ścieżką, a jak te zadane nazwą lokalną.  Sprawdź jak odtwarzane z archiwum są
+atrybuty plików (np. jeśli odtwarza pliki inny użytkownik niż ich właściciel,
+i jeśli ma ustawioną jakąś istotnie różną maskę umask), jak odtwarzane są
+linki, itp.
+
+Sformułuj wniosek, jak tar archiwizuje pliki, z punktu widzenia ich
+późniejszego odtwarzania.
+<p/>
+</li>
+
+
+<li> Dalsze operacje na plikach - linki
+
+<pre>
+  touch pusty.l1
+  ln pusty.l1 pusty.l2
+  ls -l pusty.l*
+  mkdir podkatalog
+  mv pusty.l2 podkatalog
+  ls -l pusty.l* podkatalog
+  rm pusty.l1
+  mv podkatalog/pusty.l2 pusty.l1
+  ls -l pusty.l*
+  ln pusty.l1 pusty.l2
+  ls -l pusty.l*
+  chmod a=rw pusty.l1
+  ls -l pusty.l*
+  chmod a=xw pusty.l2
+  ls -l pusty.l*
+</pre>
+<p/>
+</li>
+
+
+<li> Linki symboliczne
+
+<pre>
+  ln -s pusty.l1 pusty.ls
+  ls -l pusty.l*
+  ls -lL pusty.l*
+  rm pusty.l1
+  ls -l pusty.l*
+  ls -lL pusty.l*
+  mv pusty.l2 pusty.l1
+  ls -l pusty.l*
+  ls -lL pusty.l*
+  mv pusty.ls podkatalog
+  ls -l pusty.l* podkatalog
+  ls -lL pusty.l* podkatalog
+
+  ln -s pierwszy drugi
+  ln -s drugi trzeci
+  ls -l pierwszy drugi trzeci
+  ls -lL pierwszy drugi trzeci
+  ln -s trzeci pierwszy
+  ls -l pierwszy drugi trzeci
+  ls -lL pierwszy drugi trzeci
+
+  ln -s /dev/dvd-player/film.1 film
+  ls -l film
+  ls -lL film
+</pre>
+<p/>
+</li>
+
+
+<li> Prawa dostępu - podstawowe 9 bitów (ugo-rwx)<br/>
+
+Utwórz plik i zmieniaj po kolei wszystkie bity praw dostępu i sprawdź
+uzyskany efekt poleceniem chmod.  Zapoznaj się z maską praw dostępu
+(polecenie umask), i ustawiaj różne maski po czym twórz nowe pliki
+(np. poleceniem touch) i sprawdzaj ustawienia bitów praw dostępu.
+Czy maska pozwala w pełni kontrolować prawa dostępu?
+<p/>
+
+Dla dociekliwych: czy potrafisz racjonalnie wytłumaczyć, czemu system
+nie pozwala ustawiać pewnych kombinacji praw dostępu?  Sprawdź, że
+poleceniem chmod możesz ustawiać prawa dostępu, których nie można
+uzyskać za pomocą maski.
+<p/>
+</li>
+
+
+<li> Prawa dostępu - 3 bity specjalne<br/>
+
+Utwórz plik i sprawdź ustawianie na nim (poleceniem chmod) każdego z
+trzech bitów specjalnych.  Każdorazowo obejrzyj jak polecenie ls
+wyświetla fakt ustawienia danego bitu, zarówno w przypadku gdy plik
+ma jednocześnie ustawione poszczególne bity wykonywalności (--x--x--x)
+jak i gdy ich nie ma.
+<p/>
+</li>
+
+
+<li> Listy praw dostępu ACL (zadanie opcjonalne)<br/>
+
+Jeśli chcesz poznać rozszerzone opcje sterowania prawami dostępu do
+plików, zapoznaj się z działaniem list ACL (Access Control List).
+Sprawdź czy Twój system operacyjny obsługuje listy ACL, a jeśli tak,
+to jakie polecenia do tego służą, i czy któryś z dostępnych systemów
+plików pozwala na tworzenie ACL.  Zapoznaj się z poleceniami
+obsługującymi ACL na Twoim systemie.  Np.:
+<pre>
+  man -k acl
+  man setfacl
+  man getfacl
+  man fs_listacl
+  man fs_setacl
+</pre>
+Utwórz plik z jakąś nietrywialną kombinacją praw dostępu w liście ACL,
+i sprawdź ich działanie (zapewne przy współpracy kolegi/ów).
+<p/>
+</li>
+
+
+<li> Pliki specjalne (zadanie opcjonalne)<br/>
+
+Zapoznaj się z poleceniem mknod i utwórz nim plik specjalny potoku.
+Spróbuj zapisać coś do tego pliku (&ldquo;cat > plik&rdquo;) albo go odczytać.
+<p/>
+
+Wskazówka: otwórz dwa okienka terminala, i w jednym wykonaj:
+<pre>
+  cat plik_potoku
+</pre>
+a w drugim:
+<pre>
+  cat >plik_potoku
+</pre>
+a następnie pisz w drugim okienku jakieś teksty.
+<p/>
+
+Za pomocą programu find poszukaj na dysku plików specjalnych takich jak:
+gniazdka, potoki, i inne urządzenia.  Spróbuj katalogów /tmp i /var/tmp
+<p/>
+</li>
+
+
+</ol>
+
+
+<h2> Uwaga ogólna </h2>
+
+Ilekroć chcesz eksperymentować na swoim lub czyimś systemie na koncie
+roota (uid=0), wcześniej nagraj wszystkie dane z komputera (również te
+z partycji Windows, jeśli maszyna taką posiada) na nośniki zewnętrzne.
+Jednocześnie przygotuj się do reinstalacji systemu, zapisz najważniejsze
+ustawienia konfiguracyjne, zgraj hasła użytkowników, itp. :-(
+
+
+</body>
+</html>
+

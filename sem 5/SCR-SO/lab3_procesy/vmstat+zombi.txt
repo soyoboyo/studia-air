@@ -1,0 +1,88 @@
+
+
+Zadanie 2 (e-portal) - vmstat
+
+uruchamia polecenie
+w całości (potrafi wyjaśnić co znajduje się w kolumnach)
+uruchamia z różnymi parametrami czasowymi
+
+procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+ 0  0      0 9103864  70760 793724    0    0    7    3    66  112  1  0 99  0  0
+
+procs
+r: liczba procesów oczekujących
+b: liczba procesów uśpionych
+memory
+swpd: ilość używanej pamięci wirtualnej
+free: ilość pamięci w stanie bezczynności
+buff: ilość pamięci używanej jako bufory
+cache: ilość pamięci używanej jako pamięć cache
+swap
+si: ilość pamięci zamienionej z partycji wymiany
+so: ilość pamięci zamienionej do partycji wymianiay
+io
+bi: bloki pamięci otrzymane z urządzenia blokowego
+bo: blocki pamięci wysłane do urządzenia blokowego
+system
+in (interrupts): liczba przerwań na sekundę
+cs (context swtiches): liczba przełączeń kontekstu na sekundę 
+CPU (w procentach)
+us (user time): czas przeznaczony na kod (oprócz kernela)
+sy (system time): czas przeznaczony na kod kernela 
+id (idle): czas zużyty na bezczynności
+wa (waiting): czas oczeikwania na operacje IO
+st (stolen): czas zabrany z maszyny wirtualnej
+
+poniżej rezultaty wywołania polecenia 'vmstat 5 5' czyli 5 odczytów co 5 sekund
+w międzyczasie uruchomiono przeglądarkę firefox, pozwoliło to zobaczyć zmiany w przydzielanych zasobach (firefox dużo żre), np. zwiększone użycie procesora (wynika to z tego że system jest postawiony na VirtualBox i dostał tylko 1 rdzeń, także przez to musi sie dużo przełączać między procesami - context switches)
+
+procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+ 0  0      0 9083892  71224 791468    0    0     7     3   66  112  1  1 99  0  0
+ 5  0      0 8979104  71260 795844    0    0   879     0  427  582 67  7 25  0  0
+ 6  0      0 8905812  71272 797760    0    0    74    25  547  545 96  4  0  0  0
+ 1  0      0 8901596  71280 796208    0    0     0     5  534  607 90  7  3  0  0
+ 6  0      0 8879220  71292 799744    0    0   391     0  368  476 60  8 32  0  0
+
+Zadanie 3 (e-portal)  - zombie
+napisane skrypty/program
+w całości, potrafi pokazać, że proces jest procesem zombie
+prawidłowa implementacja, w przypadku implementacji w C, potrafi powiedzieć co zwraca funkcja fork()
+
+program:
+#include <stdlib.h>
+#include <sys/types.h>
+#include <unistd.h>
+
+int main ()
+{
+  pid_t child_pid;
+  child_pid = fork ();
+  if (child_pid > 0) {
+    sleep (60);
+  }
+  else {
+    exit (0);
+  }
+  return 0;
+}
+
+aby sprawdzić czy proces jest zombie, można użyć komendy ps z argumentami 
+-e -o pid,ppid,stat,cmd
+
+jeżeli w kolumnie STAT jest litera "Z" i kolumnie CMD jest oznacozny jako "<defunct>", to znaczy, że proces jest zombie
+
+PID   PPID STAT XMD
+4384  3391 S    ./a.out
+4393  4384 Z    [a.out] <defunct>
+
+źródło: https://www.unix.com/unix-for-dummies-questions-and-answers/100737-how-do-you-create-zombie-process.html
+
+funckja fork() zwraca
+-1 jeżeli nie duało się stworzyć procesu-dziecka
+lub 
+0 jeżeli się udało stworzyć proces-dziecko i ta wartość (czyli 0) jest zwracana do własnie tego procesu oraz zwraca PID procesu-dziecka do oryginalnego procesu (rodzicu)
+
+
+

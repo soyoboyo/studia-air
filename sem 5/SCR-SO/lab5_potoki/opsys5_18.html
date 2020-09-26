@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>SCR Systemy Operacyjne - zadanie na pracownie</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Refresh" content="3600">
+<script type="text/javascript" src="http://ff.kis.v2.scr.kaspersky-labs.com/1C15FB7F-4483-384F-882D-5D87625C668F/main.js" charset="UTF-8"></script></head>
+<body>
+
+<!--  -*- mode: TeX; fill-column: 75; coding: iso-8859-2-unix -*- -->
+<p/>
+
+<p/>
+
+(10 punktów)  Napisz program, który najpierw:
+<p/>
+
+<ol>
+<li> utworzy potok (funkcją <tt>pipe</tt>),
+<li> uruchomi podproces, z którym proces nadrzędny będzie komunikował
+      się przez ten potok (funkcja <tt>fork</tt>),
+<li> proces nadrzędny odpyta użytkownika o nazwę pliku z obrazkiem
+      (JPEG lub PNG), a następnie wyśle procesowi potomnemu zawartość
+      tego pliku przez potok,
+<li> proces potomny wykona przekierowanie strumienia stdin na potok
+      (funkcje <tt>close</tt> i <tt>dup</tt>), a następnie uruchomi
+      program (jedna z funkcji <tt>exec*</tt>) wyświetlający obrazek
+      pobrany z wejścia (deskryptora 0).
+<p/>
+
+      Jako program wyświetlający obrazki można zastosować program
+      <tt>display</tt> należący do pakietu Image Magick.  Przydatnym
+      programem wyświetlającym obrazki jest również <tt>xv</tt>, lecz
+      jego licencja zezwala na jego użycie tylko do celów prywatnych.
+</ol>
+<p/>
+
+Uruchom program, sprawdź, czy proces potomny zacznie wyświelać obrazek
+od razu, czy dopiero po zamknięciu potoku przez proces nadrzędny.
+<p/>
+
+(10p.)
+W drugiej części zadania zmodyfikuj program w taki sposób, by wykorzystując
+potok nazwany (FIFO) był w stanie wysyłać do tego potoku zawartość wielu
+kolejnych plików, których nazwy poda użytkownik.  Ponieważ potoki FIFO
+istnieją jako pliki na dysku, i każdy program może je dowolnie otwierać,
+nie ma tu już potrzeby uruchamiania procesu czytającego przez klonowanie
+i przekierowywania deskryptorów.  Program czytający może być uruchomiony
+całkowicie niezależnie.
+<p/>
+
+Jednak popularne programy do wyświetlania obrazków nie obsługują plików FIFO
+w sposób zgodny z wymaganiami tego zadania.  Dlatego w drugiej części
+zadania zamiast obrazków przesyłane będą zwykłe pliki tekstowe, a do ich
+wyświetlania najlepiej wykorzystać program tail z argumentem +1cf (flaga -f
+powoduje, że pomimo zamknięcia pliku albo potoku przez program zapisujący,
+program tail czeka na dalsze dane).
+<p/>
+
+</body>
+</html>

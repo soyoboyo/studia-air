@@ -1,0 +1,71 @@
+prodcons 1 4000 5
+count[0] = 2789
+count[1] = 994
+count[2] = 733
+count[3] = 1
+count[4] = 0
+buff[2015] = 2014
+buff[2016] = 2015
+buff[2017] = 2016
+buff[2018] = 2017
+buff[2019] = 2018
+buff[2020] = 2019
+
+prodcons 2 4000 5
+count[0] = 2443
+count[1] = 32
+count[2] = 252
+count[3] = 1230
+count[4] = 43
+
+prodcons 2 i 3
+count[0] = 43445
+count[1] = 130641
+count[2] = 75096
+count[3] = 99779
+count[4] = 43732
+count[5] = 91983
+count[6] = 87043
+count[7] = 193912
+count[8] = 132945
+count[9] = 101424
+prods sum = 1000000
+Real time: 17, User Time 13, System Time 1
+jacek@VIRbuntu:~/SCR-SO/lab7_watki/unpv22e/mutex$ ./prodcons3 1000000 10
+count[0] = 56550
+count[1] = 79894
+count[2] = 18840
+count[3] = 39083
+count[4] = 91614
+count[5] = 189171
+count[6] = 149558
+count[7] = 87687
+count[8] = 47165
+count[9] = 240438
+prods sum = 1000000
+Real time: 32, User Time 24, System Time 5
+
+
+Real time: 17, User Time 16, System Time 0
+Real time: 31, User Time 28, System Time 1
+
+Real time: 16, User Time 16, System Time 0
+Real time: 31, User Time 27, System Time 3
+
+
+prodcons 3 i 4, testy
+
+Real time: 4, User Time 2, System Time 0
+Real time: 6, User Time 4, System Time 0
+
+Real time: 31, User Time 27, System Time 2
+Real time: 33, User Time 29, System Time 1
+
+Real time: 29, User Time 27, System Time 1
+Real time: 29, User Time 26, System Time 1
+
+
+
+
+
+

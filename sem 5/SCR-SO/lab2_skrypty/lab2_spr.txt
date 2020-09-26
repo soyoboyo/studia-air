@@ -1,0 +1,105 @@
+SCR-SO, lab 2, środa 7:30
+Jacek Zalewski, 218598
+data lab: 11.10.2017
+data oddania: 7.10.2017
+
+zad 1 (2p.)
+Skrypt wyświetla w terminalu czy mamy dzień roboczy, czy weekend, prawdopodobnie też jest niezależny od języka i lokalizacji
+
+#!/bin/bash
+DAY=`date +%u`
+export LC_ALL=C.UTF8
+
+if [ "$DAY" -le 5 ]; then
+  echo "workday"
+else 
+  echo "weekend"
+fi
+
+zad 2
+
+Skrypt wyświetla treść emaila i załączniki dla każdego emaila oddzielnie
+
+#!/bin/bash
+ad="adresy.txt"
+tre=$(cat tresc.txt)
+zal=$(find spec*.pdf)
+while read line;
+do  
+  echo $line
+  echo $tre
+  echo $zal
+done < $ad
+
+
+zad 3
+
+Skrypt najpierw znajduje konkretne pliki, a następnie tworzy z nich archiwum .tar o podanej nazwie
+
+#!/bin/bash
+pliki=$( find $1 -mtime $3 )
+tar -cf $2 $pliki
+
+przykład wywołania:
+sh zad23.sh 'spec*' 'test.tar' -7
+
+znajdź wszystkie pliki o nazwie zaczynającej się od "spec", modyfikowane w ciągu ostatnich 7 dni
+i zapakuj je do paczki o nazwie "test.tar"
+
+zad 4
+
+Skrypt jest modyfikacją skryptu z zad. 3
+
+można w nim podawać parametry wedle uznania:
+-n liczba dni
+-m maska wyszukiwania
+-a nazwa archiwum .tar
+-h wyświetla manual skryptu (tylko 1 przykładowe zdanie, ale wiadomo o co chodzi)
+
+ale jeżeli użytkownik nie poda jakiegoś argumentu, będzie zapytany o niego podczas działania skryptu
+
+
+#!/bin/bash
+
+usage() { echo "$0 usage: cos tam jakies poradnik uzywania"; exit 0; }
+#default values
+N="def"
+mask="def"
+tarName="def"
+
+
+while getopts ":n:m:a:" opt; 
+do
+  case "${opt}" in
+    n) N=${OPTARG}
+       echo "N = ${N}"
+      ;;
+    m) mask=${OPTARG}
+       echo "mask = ${mask}"
+      ;;
+    a) tarName=${OPTARG}
+       echo "tar name is ${tarName}"
+      ;;
+    h | * ) usage 
+      exit 0 ;;
+  esac
+done
+
+
+if [ "$N" = "def" ]; then
+  read -p "missing argument -n, input now please  " input 
+  N=$input
+fi
+
+if [ "$mask" = "def" ]; then
+  read -p "missing argument -m, input now please  " input
+  mask="$input"
+fi
+if [ "$tarName" = "def" ]; then
+  read -p "missing argument -a, input now please  " input
+  tarName=$input
+fi
+
+files=$( find ${mask} -mtime ${N} )
+tar -cf '$tarName' $pliki
+

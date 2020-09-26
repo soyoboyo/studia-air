@@ -1,0 +1,146 @@
+SCR-SO, lab 1
+Jacek Zalewski, 218598
+data lab: 4.10.2017
+data oddania: 29.10.2017
+
+zad 1. 
+Polecenia na katalogach
+
+cd <nazwa> - choose directory, przechodzimy do wybranego folderu albo używając ".." cofamy się o 1 folder do góry
+ls - wyświetla listę wszystkich widocznych plików i folderów
+ls -l: wyświetla listę wszystkich widocznych plików i folderów, w formacie listy ze szczegółami
+ls -a: wyświetla też ukryte pliki i foldery
+man ls: wyświetla pomoc dotyczącą komendy ls
+mkdir <podkatalog>: tworzy folder o nazwie podkatalog
+rmdir: usuwa folder o nazwie podkatalog
+ls -ltr: to samo co ls -l tylko wyświetlanie jest posegregowane wg. ostatniej modyfikacji (od najstarszych), gdzie -t sortuje od najnowszych, a -r odwraca kolejność
+ls -l *.conf: wyświetla wszystkie pliki z danych rozszerzeniem, w tym przypadku .conf
+ls -l *.?: wyświetla wszystkie pliki o dowolnej nazwie, ale z jednoliterowym typem np. .c, żeby wyświetliść pliki .sh trzeba użyć ls -l *.??
+
+ls i cd są jednymi z najczęściej używanymi poleceniami
+
+
+zad 2. 
+Operacje na plikach
+
+cd $HOME: przejście do folderu /home danego użytkownika
+touch pusty: tworzenie pliku o nazwie "pusty"
+cp pusty drugi: tworzenie kopii pliku "pusty" o nazwie "drugi"
+mv drugi drugipusty: zmiana nazwy pliku "drugi" na "drugipusty"
+rm pusty drugipusty: usunięcie plików pusty i drugipusty
+
+program less slłuży do przeglądania plików w terminalu ale podzielonych na strony, szczególnie przydatny dla dużych plików
+
+zad 3. 
+Prawda dostępu do plików - pierwsze kroki
+
+echo proba > probny_plik: utworznie pliku o nazwie probny_plik i wpisanie do niego słowa "proba"
+chmod -r probny_plik: usunięcie uprawnień odczytywania danego pliku
+chmod u+r probny_plik: przywrócenie uprawnień odczytywania pliku
+chmod go-rwx probny_plik: usunięcie wszystkich upradnień (read, write, excute) dla grupy i innych (other)
+
+
+zad 4.
+Operacje na procesach
+
+ps: wyświetla procesy uruchomione z tego samego terminala
+ps -e: wyświetla wszystkie procesy w systemie
+ps -ef: wyświetla wszystkie procesy w systemie, ale w pełnym formacie
+ps -ef | less: wyświetlenie procesów w programie less
+ps -el: wyświetla wszyskie procesy w formacie BSD
+top: podgląd procesów w systemie w czsie rzeczywistym
+
+
+zad 5.
+Kasowanie procesów:
+kill pid: kasuje proces o numerze <pid>
+
+zad 6.
+Uzyskiwanie informacji o użytkownikach włączonych do systemu
+who: wyświetla którzy użytkownicy są obecnie zalogowani
+finger: wyświetla trochę bardziej szczegółowe informacje o zalogowanych użytkownikach
+
+
+zad 7.
+Uzyskiwanie informacji o historii wlaczen do systemu
+
+last: wyświetla historię zalogowań do systemu zapisaną w pliku /var/log/wtmp
+last | less: jw. tylko że otwiera plik w programie less
+
+zad 8.
+Uzyskiwanie informacji o istniejących kontach użytkowników
+
+  cat /etc/passwd                # plik kont
+  niscat passwd.org_dir          # baza danych kont - może nie istnieć
+  ldaplist passwd                # inna baza danych - też może nie istnieć
+
+ad 2 i 3, u mnie nie istniały
+  
+zad 9.
+Proste skrypty
+
+skrytp zawiera kilka podstawowych komend, polecenie set -x powoduje wyświetlanie każdej wywołanej komendy w terminalu
+
+#!/bin/bash
+set -x
+mkdir katalog
+touch plik.txt plik2.txt
+mv plik.txt zmieniony.txt
+chmod u+rw zmieniony.txt
+rm plik2.txt
+
+
+
+zad 10.
+Dalsze ćwiczenia ze skryptami
+
+skrypt pozwalający utworzyć plik i folder o podanych nazwach, przed każdą operacją pyta użytkownika o zgodę
+
+#!/bin/bash
+
+FILENAME="$1"
+FOLDERNAME="$2"
+
+while true; do
+	read -p "czy utworzyc plik o nazwie ${FILENAME}? (y/n)  " yn
+	case $yn in
+		[Yy]* ) touch $FILENAME; break;;
+		[Nn]* ) exit;;
+
+	* ) 
+esac
+done
+
+while true; do
+	read -p "czy utworzyc folder o nazwie ${FOLDERNAME}? (y/n)  " yn
+	case $yn in
+		[Yy]* ) mkdir $FOLDERNAME; break;;
+		[Nn]* ) exit;;
+
+	* ) 
+esac
+done
+
+zad 11.
+Program find
+pojedynczym wywołaniem find znaleźć
+a)	w katalogu /etc: 
+	pliki o rozmiarze do 1kB 
+	utworzone w ciągu ostatnich 3 dni 
+
+b)	oraz pliki nie większe niż 250 kB 
+	utworzone nie mniej niż miesiąc 
+	ale nie więcej niż trzy miesiące temu
+
+a)
+find /etc: znajduje wszystkie pliki w katalogu /etc
+find /etc : jw. ale wyświetla tylko pliki nie większe niż 1kB
+find /etc -size 1k -mtime 3: jw. ale wyświetla tylko pliki nie starsze niż 3 dni
+
+b)
+find /etc -msize 250k: pliki nie większe niż 250 kB
+find /etc -msize 250k \( -mtime +30 -and -mtime 90 \): jw. ale wyświetla tylko pliki starsze niż miesiąc i nowsze niż 3 miesiące
+
+
+
+

@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>SCR Systemy Operacyjne - zadanie na pracownie</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Refresh" content="3600">
+<script type="text/javascript" src="http://ff.kis.v2.scr.kaspersky-labs.com/1C15FB7F-4483-384F-882D-5D87625C668F/main.js" charset="UTF-8"></script></head>
+<body>
+
+<!--  -*- mode: TeX; fill-column: 75; coding: iso-8859-2-unix -*- -->
+<p/>
+
+<p/>
+
+<ol>
+<p/>
+
+<li> (2p.)
+Zapoznaj się z programem <tt>ps</tt> (<tt>man ps</tt>).  Wypróbuj dwa formaty
+wyświetlania rozszerzonych infomracji: <tt>-f</tt> i <tt>-l</tt>.  Przeczytaj
+podręcznik polecenia <tt>ps</tt> aby zrozumieć wyświetlane parametry.  Naucz
+się wybierać zestaw procesów do wyświetlania argumentami opcjonalnymi
+<tt>-u</tt>, <tt>-t</tt>, i <tt>-p</tt>.
+<p/>
+
+Ile Twoich procesów istniało w systemie w chwili przykładowego wywołania
+<tt>ps</tt>?
+<p/>
+
+Ile procesów <tt>sshd</tt> istniało w systemie (serwerze) w chwili
+wykonywania ćwiczenia (sprawdź polecenie <tt>pgrep</tt>)?
+<p/>
+
+<!-- <li> (2p.) -->
+<!-- Zapoznaj się z programem <tt>vmstat</tt> (<tt>man vmstat</tt>) -->
+<!-- uruchamiając go na przykład z argumentem 1 zarówno na systemie Solaris -->
+<!-- jak i na Linuksie.  Postaraj się zrozumieć parametry systemowe -->
+<!-- wypisywane przez program.  Sformułuj kilka prostych wniosków z -->
+<!-- porównania zaobserwowanych parametrów systemów diablo i panamint. -->
+<p/>
+
+<li> (2p.)
+W jednym okienku terminala uruchom hierarchię co najmniej trzech procesów,
+tzn. procesy <tt>A</tt>, który uruchomi proces potomny <tt>B</tt>, który
+uruchomi proces potomny <tt>C</tt>.  Mogą to być kolejno uruchamiane
+interpretery poleceń, albo uruchamiające się kolejno skrypty lub programy.
+W innym oknie terminala sprawdź programem <tt>ps</tt> zależności potomków i
+rodziców w utworzonej hierarchii.
+<p/>
+
+Poleceniem <tt>kill</tt> zabij proces w środku tej hierarchii (<tt>B</tt>).
+Sprawdź poleceniem <tt>ps</tt> co pozostało z pierwotnych procesów, i czy
+osierocony proces zostanie poprawnie adoptowany przez proces <tt>init</tt>.
+<p/>
+
+W sprawozdaniu z wykonania zadania opisz tylko otrzymany wynik, nie wklejaj
+napisanych skryptów.
+<p/>
+
+<!-- <li> (2p.) -->
+<!-- Obmyśl jak wyprodukować proces zombie, wykonaj to, i sprawdź w jaki -->
+<!-- sposób pojawia się on na liście procesów ps (Linux, Solaris). -->
+<!-- Następnie, z pewnym opóźnieniem spowoduj uwolnienie procesu zombie za -->
+<!-- pomocą wbudowanego polecenia <tt>wait</tt>, nie kończąc jeszcze procesu -->
+<!-- rodzica.  Sprawdź, że proces zombie zakończył się (zniknął). -->
+<!--  -->
+<!-- Wskazówka: interpreter poleceń <tt>bash</tt> zapobiega powstawaniu zombie -->
+<!-- (gdy proces zombie jest uruchomionym przez <tt>bash</tt> skryptem). -->
+<!-- Jeśli nie uda Ci się go zwalczyć, to możesz zamiast skryptem shella -->
+<!-- utworzyć zombie programem napisanym w C zgodnie z definicją procesu zombie. -->
+<!-- Jest to proste i działa niezawodnie. -->
+<!--  -->
+<!-- Do sprawozdania z wykonanego zadania dołącz opracowane skrypty lub program. -->
+<p/>
+
+<li> (2p.)
+Uruchom potok co najmniej trzech poleceń działających przez jakiś
+zauważalny czas.  Mogą to być odpowiednio dobrane polecenia systemowe, lub
+samodzielnie napisane skrypty.  Sprawdź poleceniem <tt>ps</tt> i odpowiedz
+jakie zachodzi pokrewieństwo między tymi procesami (jeśli w ogóle
+zachodzi).
+<p/>
+
+Wskazówka: ponieważ potok służy do przesyłania danych od procesu do
+procesu, i synchronizuje pracę wszystkich procesów odpowiednio do
+pojawiających się danych, dobrą metodą generowania demonstracyjnego potoku
+jest umieszczenie na jego początku procesu, wysyłającego na swoje wyjście
+stały strumień danych, np. piszącego w pętli co sekundę jakiś krótki
+komunikat.  Kolejne elementy potoku mogą być relizowane przez program
+<tt>cat</tt>.
+<p/>
+
+<li> (2p.)
+Poleceniem <tt>mknod</tt> utwórz potok nazwany (FIFO).  W co najmniej
+czterech okienkach wywołaj równoczesne pisanie do, i równoczesne czytanie z
+tego potoku przez wiele procesów (polecenie <tt>cat</tt>).
+<p/>
+
+Sprawdź (i podaj w raporcie) jak system rozdziela dane z pliku procesom o
+współdzielonym dostępie do tego potoku?
+<p/>
+
+Zabijając na przemian procesy piszące/czytające, zaobserwuj, kiedy proces
+<tt>cat</tt> czytający z potoku czeka na więcej danych, a kiedy kończy pracę.
+Analogicznie, kiedy proces piszący czeka w gotowości do dalszego pisania na
+potoku, a kiedy samoistnie kończy pracę.  Podsumuj w raporcie.
+<p/>
+
+<!-- <li> -->
+<!-- Uruchom kilka podprocesów jednego procesu i wyświetlających -->
+<!-- komunikaty na ekranie bez żadnego porządku ani ładu.  Celem jest -->
+<!-- otrzymanie chaosu na ekranie. -->
+<p/>
+
+<li> (2p.)
+Napisz skrypt, który w pętli będzie coś robił (np. co sekundę wypisywał
+bieżącą godzinę).  Sprawdź wysyłanie do procesu różnych sygnałów poleceniem
+<tt>kill</tt> (<tt>SIGINT</tt>, <tt>SIGQUIT</tt>, ale także <tt>SIGFPE</tt>,
+<tt>SIGILL</tt>).  Następnie rozbuduj skrypt o przechwytywanie tych sygnałów
+(<tt>trap</tt>) i sprawdź, że to działa, to znaczy, że tak napisanego procesu
+nie da się zabić tymi sygnałami.  Sprawdź możliwość uśmiercenia sygnałem
+<tt>SIGKILL</tt> procesu, który przechwytuje wszystkie 15 podstawowych
+sygnałów.
+<p/>
+
+Uwaga: trap jest wbudowanym poleceniem shella, i jego wywołanie trochę
+się różni pod różnymi shellami.  Najłatwiej jest wykonać to ćwiczenie
+przy użyciu Bourne shella (/bin/sh), ponieważ bash wykonuje różne potajemne
+zabiegi z obsługą sygnałów.  Jednak polecenie trap w Bourne shellu jest
+prymitywne - czytaj 'man sh'.
+<p/>
+
+<li> (2p.)
+Sprawdź możliwość zawieszania procesu sygnałem <tt>SIGSTOP</tt> i
+wznawiania sygnałem <tt>SIGCONT</tt>.  Sprawdź, że sygnał <tt>SIGSTOP</tt>
+daje taki sam efekt jak naciśnięcie klawisza <tt>Ctrl+Z</tt> na
+terminalu.  Sprawdź, że sygnał <tt>SIGCONT</tt> daje taki sam efekt jak
+wykonanie polecenia <tt>fg</tt> lub <tt>bg</tt> (którego bardziej?).
+<p/>
+
+<li> (2p.)
+Zapoznaj się z poleceniem <tt>ulimit</tt>.  Ustaw liczbę procesów na małą
+wartość i sprawdź, czy działanie jest respektowane.  Następnie napisz
+skrypt, który w nieskończonej pętli uruchamia kolejne kopie samego siebie w
+tle.  \textbf{Uruchom skrypt koniecznie w tej powłoce, w której
+  ograniczyłeś/ograniczyłaś maksymalną liczbę procesów!}  Następnie spróbuj
+opanować sytuację, czyli pozabijać wszystkie utworzone procesy i powrócić
+do normalnej pracy.
+<p/>
+
+<li> (2p.)
+Sprawdź wartości priorytetów procesów i ich liczby <tt>nice</tt>, a
+następnie przećwicz obniżanie priorytetu pracującego w tle procesu
+(<tt>nice</tt>/<tt>renice</tt>).  Czy potrafisz zademonstrować działanie
+obniżonego liczbą <tt>nice</tt> priorytetu?
+<p/>
+
+Podsumuj wynik w raporcie i podaj polecenie obniżania priorytetu procesu.
+<p/>
+
+</ol>
+<p/>
+
+</body>
+</html>

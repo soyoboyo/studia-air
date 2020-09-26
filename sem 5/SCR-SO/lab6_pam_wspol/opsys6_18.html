@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>SCR Systemy Operacyjne - zadanie na pracownie</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Refresh" content="3600">
+<script type="text/javascript" src="http://ff.kis.v2.scr.kaspersky-labs.com/1C15FB7F-4483-384F-882D-5D87625C668F/main.js" charset="UTF-8"></script></head>
+<body>
+
+<!--  -*- mode: TeX; fill-column: 75; coding: iso-8859-2-unix -*- -->
+<p/>
+
+<p/>
+
+(15 punktów) Napisz program, który:
+<p/>
+
+<ol>
+<li> wykona mapowanie obszaru pamięci do pliku na dysku (funkcja
+  <tt>mmap</tt>), w taki sposób, aby zapisy do pamięci były widoczne w
+  pliku,
+<li> stworzy podproces, który następnie uruchomi program (jedną z
+  funkcji <tt>exec*</tt>) wyświetlający obrazek ze zmapowanego pliku z
+  opcją aktualizacji (np. <tt>display -update 1</tt>),
+<li> w procesie nadrzędnym będzie wykonywał w pętli nieskończonej
+  następujące operacje:
+  <ul>
+  <li> odpyta użytkownika o nazwy kolejnych plików z obrazkami (JPEG
+        lub PNG),
+  <li> obliczy długość pliku i zmieni odpowiednio wielkość obszaru
+    pamięci wspólnej i zmapowanego pliku (funkcje <tt>stat</tt>,
+    <tt>mmap</tt>, <tt>ftruncate</tt>),
+  <li> wczyta podany plik obrazka do zmapowanego obszaru pamięci,
+  <li> w razie potrzeby wymusi aktualizację wyświetlanego obrazu
+    przez podproces (funkcja <tt>memcntl/MC_SYNC</tt>???).
+  </ul>
+</ol>
+<p/>
+
+Struktura programu i wykorzystywanych przezeń plików przedstawiona
+jest na poniższym rysunku:
+<p/>
+
+<!--  sciezka obrazka ma sens tylko w odniesieniu do drzewa katalogow www -->
+<img src="/&nbsp;witold/opsys/zad_mmap.png" alt="image"/>
+<p/>
+
+Jako program wyświetlający obrazki można zastosować program display
+należący do pakietu Image Magick.  Przydatnym programem wyświetlającym
+obrazki jest również xv, aczkolwiek jego licencja zezwala tylko na
+użycie do celów prywatnych.
+<p/>
+
+Wskazówka: dla ułatwienia dobrze jest przed uruchomieniem programu
+przekopiować dowolny obrazek do pliku, który będzie mapowany i
+wyświetlany programem <tt>display</tt>, aby miał on od razu gotowy
+obrazek do wyświetlania, zanim program zrealizuje całą strukturę.
+<p/>
+
+Uwaga: wersja programu <tt>display</tt> na Solarisie (diablo) ma jakiś
+błąd powodujący, że opcja <tt>update</tt> nie działa prawidłowo.  Jako
+obejście błędu można użyć dodatkowo opcji <tt>delay</tt>
+(np. <tt>delay 2</tt>), co spowoduje aktualizację obrazka.  Wersja
+programu na Linuksie nie ma tego problemu.
+<p/>
+
+</body>
+</html>

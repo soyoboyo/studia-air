@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>SCR Systemy Operacyjne - zadanie na pracownie</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Refresh" content="3600">
+<script type="text/javascript" src="http://ff.kis.v2.scr.kaspersky-labs.com/1C15FB7F-4483-384F-882D-5D87625C668F/main.js" charset="UTF-8"></script></head>
+<body>
+
+<!--  -*- mode: TeX; fill-column: 75; coding: iso-8859-2-unix -*- -->
+<p/>
+
+<p/>
+
+(15 punktów) Zadanie koncentruje się wokół problemu producenta i konsumenta, który jest znany również pod nazwą problemu ograniczonego bufora (bounded buffer problem). Jeden lub więcej producentów (wątków lub procesów) wytwarza elementy (dane), które są przetwarzane przez jednego lub więcej konsumentów (wątków lub procesów). Elementy są przesyłane pomiędzy producentami i konsumentami z wykorzystaniem jakieś formy komunikacji międzyprocesowej.
+<p/>
+
+W zadaniu będą wykorzystane programy pochodzące z podręcznika W.R. Stevensa &#132;UNIX. Programowanie usług sieciowych. Tom 2 - Komunikacja międzyprocesowa&#148; które można ściągnąć ze strony: <a href="http://www.kohala.com/start/unpv22e/unpv22e.html">http://www.kohala.com/start/unpv22e/unpv22e.html</a>
+<p/>
+
+Wykonaj polecenia i odpowiedz na pytania zawarte w poniższym tekście.
+W raporcie z wykonania zadania wpisz jedynie odpowiedzi na pytania,
+przy których jest zaznaczone, że odpowiedź powinna być zawarta w raporcie.
+Pozostałe pytania mają charakter pomocniczy, ich celem jest zwrócenie
+uwagi na istotne kwestie i pomoc w zrozumieniu przytoczonych programów.
+Prowadzący może wymagać ustnej odpowiedzi na te pytania przy
+sprawdzaniu zadania.
+<p/>
+
+<p/>
+
+<ol>
+<p/>
+
+<p/>
+
+<li> Budowanie programów
+<ul>
+<li> Ściągnij za pomoca programu <tt>wget</tt> plik <a href="http://www.kohala.com/start/unpv22e/unpv22e.tar.gz">http://www.kohala.com/start/unpv22e/unpv22e.tar.gz</a> do lokalnego katalogu i rozpakuj go za pomoca <tt>gunzip</tt> i <tt>tar</tt>.
+<li> Wejdź do rozpakowanego katalogu i uruchom <tt>./configure</tt>
+<li> Jeżeli pracujesz na Linuksie otwórz plik <tt>config.h</tt> i usuń nastepujace wiersze:
+<pre>
+#define uint8_t unsigned char     /* &lt;sys/types.h&gt; */
+#define uint16_t unsigned short   /* &lt;sys/types.h&gt; */
+#define uint32_t unsigned int     /* &lt;sys/types.h&gt; */
+</pre>
+<li> Wejdź do katalogu <tt>lib</tt> i wykonaj <tt>make</tt>.
+<li> Wejdź do katalogu <tt>mutex</tt> i wykonaj <tt>make</tt>.<br/>
+      Programy prodcons*.c zawarte w tym katalogu są przedmiotem
+      niniejszego zadania.
+</ul>
+<p/>
+
+<p/>
+
+<li> Prodcons1
+<ul>
+<li> Zapoznaj się z programem źródłowym <tt>prodcons1.c</tt>.
+<li> Odpowiedz na poniższe pytania (tylko ustnie):
+  <ul>
+  <li> W której zmiennej przechowywana jest liczba producentów?
+  <li> W jaki sposób producenci wypełniają tablice <tt>shared.buff</tt>?
+  <li> Kiedy tablica <tt>shared.buff</tt> jest wypełniona prawidłowo?
+  <li> Jaka funkcja jest odpowiedzialna za tworzenie nowych wątków (+ wyjaśnij jej argumenty)?
+  <li> Do czego służą i w jaki sposób są modyfikowane zmienne <tt>shared.nput</tt> i <tt>shared.nval</tt>?
+  <li> Która funkcja realizuje producentów, a która konsumenta?
+  <li> Za co są odpowiedzialne funkcje <tt>Set_concurrency</tt> i <tt>Pthread_join</tt> (+ wyjaśnij ich argumenty)?
+  </ul>
+<li> Uruchom program <tt>prodcons1</tt> z parametrami <tt>nitems</tt> i <tt>nthreads</tt> np. równymi odpowiednio 3000 i 5 (<tt>./prodcons1 3000 5 | less</tt>).<br/>
+Za którymś razem na ekranie pojawią się komunikaty podobne do poniższych:
+<pre>
+count[0] = 2632  
+count[1] = 984   
+count[2] = 233   
+count[3] = 648   
+count[4] = 509   
+buff[1679] = 1657
+buff[1680] = 1657
+buff[1681] = 1658
+buff[1682] = 1659
+buff[1683] = 1660
+</pre>
+Odpowiedz w raporcie:<br/>
+Co może być powodem tego, że suma wartości komórek tablicy <tt>count</tt>, na powyższym przykładzie, przekracza wartość <tt>nitems</tt> (inaczej: dlaczego liczba cykli pracy poszczególnych producentów przekracza liczbę wytwarzanych produktów)?
+</ul>
+<!--  Zadania dodatkowe: -->
+<!--  1. (łatwe) Dodaj w programie sprawdzenie zgodności sumy jednostek -->
+<!--     wyprodukowanych przez poszczególnych producentów z zadaną ilością, i -->
+<!--     na samym końcu programu komunikat informujący czy się zgadzają. -->
+<!--  2. (a - łatwe) W kodzie konsumenta zamień komunikaty informujące o -->
+<!--     niezgodności poszczególnych pozycji tablicy buff na obliczanie liczby -->
+<!--     pozycji z wartością wyższą od indeksu i niższą od indeksu, i -->
+<!--     wyświetlenie tylko tych wartości. -->
+<!--     (b - łatwe) Wykonaj serię eksperymentów z różnymi wartościami nitems -->
+<!--     zarówno na diablo jak i na panamincie.  Opisz uzyskane niezgodności. -->
+<!--     (c - trudne) Spróbuj wyjaśnić w jaki sposób one powstały. -->
+<!--     Podpowiedź: w eksperymentach pojawiają się zarówno wartości wyższe -->
+<!--     jak i niższe od wartości indeksu, i to zarówno przy sumie jednostek -->
+<!--     wyprodukowanych przez poszczególnych producentów równej jak i różnej -->
+<!--     od nitems -->
+<!--  3. (a) W kodzie producenta, pomiędzy &#132;produkcją&#148; a zwiększaniem -->
+<!--     liczników, dodaj instrukcję nanosleep zawieszającą wątek na pewien -->
+<!--     czas.  Dodaj ten czas wyrażony w mikrosekundach jako trzeci argument -->
+<!--     wywołania programu.  Przeprowadź serię eksperymentów na diablo i -->
+<!--     panamincie żeby ustalić jaki efekt na wyniki produkcji ma to opóźnienie. -->
+<!--     Podpowiedź: wydaje mi się, że przy dostatecznie dużych czasach wątki -->
+<!--     producentów powinny produkować równomiernie, a niezgodności produkcji -->
+<!--     powinny być pewne (bez opóźnienia mogły one pojawiać się lub nie). -->
+<!--     Jednak co znaczy &#132;dostatecznie duży czas&#148; zależy pewnie od systemu. -->
+<!--     (b) Przesuń instrukcję opóźnienia nanosleep dalej, za instrukcje -->
+<!--     inkrementacji zmiennych globalnych.  Powtórz eksperymenty i ponownie -->
+<!--     spróbuj wyjaśnić uzyskane wyniki. -->
+<!--     Podpowiedź: wydaje mi się, że przy dostatecznie dużych czasach -->
+<!--     opóźnienia niezgodności powinny pojawiać się rzadko, ale jednak będą. -->
+<!--     Wątki producentów powinny produkować równomiernie. -->
+<p/>
+
+<li> Prodcons2
+<ul>
+<li> Zapoznaj się z programem źródłowym <tt>prodcons2.c</tt>.
+<li> Odpowiedz na poniższe pytania (tylko ustnie):
+  <ul>
+  <li> Ilu producentów może jednocześnie operować na polach <tt>shared.buff</tt>, <tt>shared.nput</tt>, <tt>shared.nval</tt>?
+  <li> Która zmienna i jakiego typu jest używana do synchronizacji działań producentów?
+  <li> Do czego służą i jaki wpływ na działanie funkcji <tt>produce</tt> mają funkcje <tt>Pthread_mutex_lock</tt> i <tt>Pthread_mutex_unlock</tt> (+ wyjaśnij argumenty)?
+  <li> Jak działa synchronizacja za pomocą mutexu?
+  <li> Co jest efektem następującej inicjalizacji w deklaracji zmiennej <tt>shared</tt>:
+  <pre>
+  shared =  PTHREAD_MUTEX_INITIALIZER ;
+  </pre>
+  <li> Co zyskał program dzięki wprowadzeniu synchronizacji?
+  </ul>
+<li> Uruchom program <tt>prodcons2</tt> z parametrami <tt>nitems</tt> i <tt>nthreads</tt> np. równymi odpowiednio 3000 i 8 (<tt>./prodcons2 3000 8 | less</tt>). 
+<p/>
+
+Odpowiedz w raporcie:<br/>
+Czy w serii eksperymentów pojawił się wynik, taki że suma wartości komórek tablicy <tt>count</tt>, jest różna od wartości <tt>nitems</tt>?<br/>
+Wyjaśnij poczynione obserwacje.
+</ul>
+<p/>
+
+<p/>
+
+<li> Prodcons3
+<ul>
+<li> Zapoznaj się z programem źródłowym <tt>prodcons3.c</tt>.
+<li> Przeprowadź szczegółową analizę działania funkcji <tt>consume_wait</tt> i wyjaśnij jej rolę w funkcji <tt>consume</tt> (tylko ustnie).
+<li> Odpowiedz na poniższe pytania (tylko ustnie):
+  <ul>
+  <li> Kiedy konsument może sprawdzać elementy tablicy <tt>shared.buff</tt>?
+  <li> Jak działa funkcja <tt>times</tt>?<br/>
+        W jakich jednostkach zlicza ona czas wykorzystania procesora i jak można przeliczyć go na sekundy? (<tt>man -s 2 times</tt>)
+  </ul>
+<li> Zmodyfikuj programy <tt>prodcons2</tt> i <tt>prodcons3</tt> tak by umożliwiać wyznaczenie czasu wykonywania się obu programów.  Użyj w tym celu funkcji <tt>times</tt> (można posłużyć się przykładem zamieszczonym na stronie <a href="http://www.opengroup.org/onlinepubs/009695399/functions/times.html">http://www.opengroup.org/onlinepubs/009695399/functions/times.html</a>)
+<p/>
+	
+Odpowiedz w raporcie:<br/>
+Uruchom kilka razy zmodyfikowane programy <tt>prodcons2</tt> i <tt>prodcons3</tt> z identycznymi parametrami <tt>nitems</tt> i <tt>nthreads</tt> np. równymi odpowiednio 300000 i 8.<br/>
+Wyjaśnij poczynione obserwacje.
+</ul>
+<p/>
+
+<p/>
+
+<li> Prodcons4
+<ul>
+<li> Zapoznaj się z programem źródłowym <tt>prodcons4.c</tt>.
+<li> Zmodyfikuj program <tt>prodcons4</tt> by umożliwiać wyznaczenie czasu wykonywania się obu programów (tak jak <tt>prodcons2</tt> i <tt>prodcons3</tt> w poprzednim zadaniu).
+<p/>
+	
+Odpowiedz w raporcie:<br/>
+Uruchom kilka razy zmodyfikowane programy <tt>prodcons3</tt> i <tt>prodcons4</tt> z identycznymi parametrami <tt>nitems</tt> i <tt>nthreads</tt> np. równymi odpowiednio 300000 i 8.<br/>
+Wyjaśnij poczynione obserwacje.
+<li> Przeczytaj opis funkcji <tt>sched_yield</tt> i wyjaśnij do czego służy i jak działa (tylko ustnie).
+<li> Przeczytaj opis biblioteki rozszerzeń czasu rzeczywistego <tt>librt</tt> i wyjaśnij do czego służy (tylko ustnie).
+</ul>
+<p/>
+
+<p/>
+
+<li> Prodcons5
+<ul>
+<li> Zapoznaj się z programem źródłowym <tt>prodcons5.c</tt>.
+<li> Odpowiedz na poniższe pytania (tylko ustnie):
+  <ul>
+  <li> Do czego służą i jak działają funkcje <tt>Pthread_cond_wait</tt> i <tt>Pthread_cond_signal</tt> (+ wyjaśnij argumenty)?
+  <li> Co to są zmienne warunkowe?
+  <li> Do czego służy zmienna <tt>nready.nready</tt> (+ wyjaśnij jej zastosowanie zarówno od strony producenta i konsumenta)?
+  <li> Odpowiedz w raporcie:<br/>
+        Czy jest jakaś korzyść z wykorzystania zmiennej warunkowej w programie <tt>prodcons5</tt> w porównaniu z programem <tt>prodcons3</tt>?<br/>
+        Jeśli tak, to na czym ona polega?
+  <li> Kiedy konsument może sprawdzać elementy tablicy <tt>buff</tt> (+ opisz dlaczego są wywoływane i jakie są skutki tych wywołań dla funkcji <tt>Pthread_cond_wait</tt>, <tt>Pthread_cond_signal</tt>, <tt>Pthread_mutex_lock</tt> i <tt>Pthread_mutex_unlock</tt>)?
+  </ul>
+</ul>
+<p/>
+
+<p/>
+
+<li> Prodcons6
+<ul>
+<li> Zapoznaj się z programem źródłowym <tt>prodcons6.c</tt>.
+<li> Do czego służą i jak są wykorzystywane pola struktur <tt>nready</tt> i <tt>put</tt> (+ wyjaśnij do czego i w jakim celu używają ich producenci i konsument)?
+<li> Odpowiedz w raporcie:<br/>
+Opisz mechanizm odpowiedzialny za krótszy czas wykonywania się (przyjmniej teoretycznie) programu <tt>prodcons6</tt> względem programu <tt>prodcons5</tt>.
+</ul>
+<p/>
+
+<p/>
+
+</ol>
+<p/>
+
+<p/>
+
+</body>
+</html>

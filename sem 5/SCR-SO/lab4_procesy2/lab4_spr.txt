@@ -1,0 +1,30 @@
+SCR-SO, lab 4, środa 7:30
+Jacek Zalewski, 218598
+data lab: 25.10.2017
+data oddania: 13.10.2017
+
+Zad 1.
+Następnie sprawdź wysyłanie programowi różnych sygnałów poleceniem kill. Dodaj w programie przechwytywanie sygnału/ów, i wykorzystując sygnały: SIGALRM, SIGTERM, SIGUSR1, SIGUSR2 wypróbuj następujące reakcje na sygnał: (a) wyświetlenie komunikatu i zakończenie pracy programu, (b) wyświetlenie komunikatu i powrót do wykonywania programu, (c) wstrzymywanie odebrania sygnału (np. na 1000 iteracji w pętli), i następnie wznowienie odebrania sygnału, i (d) całkowite ignorowanie sygnału. W raporcie wklej instrukcje programu deklarujące poszczególne reakcje na sygnał, i podsumuj uzyskane wyniki. 
+
+
+W przypadku BEZ użycie funkcji nanosleep() program zajmował około 97-98% procesora
+W przyapdku Z użyciem funckji nanosleep() i czasem 100ms, program zajmował < 1% procesora
+
+Zad 2.
+Zapoznaj się z narzędziami umożliwiającymi odczyt pseudosystemu plików proc (man proc). W systemie Solaris pliki w tym systemie mają specyficzny format, i do ich odczytu i dekodowania treści służy odpowiedni zestaw programów. W systemie Linux pliki w /proc maja formaty tekstowe i można je odczytywać (a w konkretnych przypadkach również zapisywać) zwykłymi narzędziami do operacji na plikach tekstowych, jak: cat, grep, itp.
+
+    Uruchom program/skrypt przechwytujący oraz ignorujący wybrane sygnały. Następnie sprawdź tablicę akcji przypisanych poszczególnym sygnałom.
+    Stwórz potok trzech poleceń, tak aby pierwszy program w nieskończonej pętli wypisywał jakiś tekst. Za pomocą odpowiedniego programu zbadaj otwarte pliki każdego z procesów uczestniczących w potoku. Czy wyłącznie na podstawie uzyskanych w ten sposób informacji można odtworzyć kolejność występowania poleceń w potoku? Jeśli tak to w jaki sposób? 
+	
+Zad 3.
+Zapoznaj się z programem truss (Solaris: man truss), w szczególności z przełącznikami takimi jak: -r, -s, -t, -u, -w. Naucz się filtrować informacje dostarczane przez truss za pomocą powyższych przełączników.
+
+    Za pomocą programu truss przeanalizuj wykonanie prostego programu wypisującego na ekran jakiś tekst. Program powinien być napisany w języku C.
+    Za pomocą programu truss zidentyfikuj oraz zlokalizuj wszystkie pliki konfiguracyjne, które powłoka bash próbuje odczytać przy starcie.
+    Za pomocą programu truss zlicz ilość wywołań funkcji printf, które wykonuje program ls, uruchomiony w Twoim katalogu.
+    Za pomocą programu truss prześledź w jaki sposób edytor tekstu (np. pico) postępuje z edytowanym plikiem? Czy plik ten jest otwarty przez cały czas działania edytora? 
+
+Zad 4.
+Zapoznaj się z narzędziem strace na Linuksie, i aby je wypróbować wykonaj z jego użyciem kilka ćwiczeń podobnych do ćwiczeń z programem truss. Podaj przykładowe wywołania strace.
+
+Uwaga: nie mylić z programem strace na Solarisie, który jest zupełnie innym programem. Linuksowy strace odpowiada Solarisowemu truss. 

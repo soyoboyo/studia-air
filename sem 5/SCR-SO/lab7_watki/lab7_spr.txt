@@ -1,0 +1,151 @@
+SCR-SO, lab 7, środa 7:30
+Jacek Zalewski, 218598
+data lab: 15.11.2017
+data oddania:
+
+
+
+prodcons1:
+Co może być powodem tego, że suma wartości komórek tablicy count, na powyższym przykładzie, przekracza wartość nitems (inaczej: dlaczego liczba cykli pracy poszczególnych producentów przekracza liczbę wytwarzanych produktów)? 
+
+./prodcons1 4000 5
+count[0] = 2789
+count[1] = 994
+count[2] = 733
+count[3] = 1
+count[4] = 0
+buff[2015] = 2014
+buff[2016] = 2015
+buff[2017] = 2016
+buff[2018] = 2017
+buff[2019] = 2018
+buff[2020] = 2019
+
+suma wynosi 4517, wynika to z tego, że program nie zawiera żadnej synchronizacji operacji na zmiennych globalnych
+
+
+==============================================================================
+prodcons2:
+Czy w serii eksperymentów pojawił się wynik, taki że suma wartości komórek tablicy count, jest różna od wartości nitems?
+Wyjaśnij poczynione obserwacje. 
+
+./prodcons2 4000 5
+count[0] = 2443
+count[1] = 32
+count[2] = 252
+count[3] = 1230
+count[4] = 43
+
+suma wartości wynosi dokładnie 4000 (w innych testach suma nigdy nie przekroczyła podanej wartości argumentu nitems)
+
+tym razem program działa, ponieważ sekcja krytyczna została otoczona mutexem
+
+	Pthread_mutex_lock(&shared.mutex);
+	if (shared.nput >= nitems) {
+		Pthread_mutex_unlock(&shared.mutex);
+		return(NULL);		/* array is full, we're done */
+	}
+	shared.buff[shared.nput] = shared.nval;
+	shared.nput++;
+	shared.nval++;
+	Pthread_mutex_unlock(&shared.mutex);
+
+==============================================================================
+prodcons3:
+Uruchom kilka razy zmodyfikowane programy prodcons2 i prodcons3 z identycznymi parametrami nitems i nthreads np. równymi odpowiednio 300000 i 8.
+Wyjaśnij poczynione obserwacje. 
+
+parametry wywoływania programów: 1000000 (milion) produktów i 10 wątków
+
+zaimplementowany mechanizm pomiaru czasu, zwraca liczbę tików zegara, czyli faktyczny czas wykonywania programu jest wprost proporcjonalny do zwracanych wartości (im więcej tym dłużej wykonywał się program)
+
+prodcons2
+Real time: 17, User Time 13, System Time 1
+prodcons3
+Real time: 32, User Time 24, System Time 5
+
+inne testy z tymi samymi parametrami (odpowiednio prodcons 2 i 3)
+Real time: 17, User Time 16, System Time 0
+Real time: 31, User Time 28, System Time 1
+
+Real time: 16, User Time 16, System Time 0
+Real time: 31, User Time 27, System Time 3
+
+W programie prodcons3 została dodana funkcja consume_wait(int i), która musi czekać, aż wątek producenta wygeneruje i-ty element, tzn jest wywoływana w pierwotnej funckji void consume(void)
+Problem pojawia się gdy trzeba podjąć decyzję, co robić, jeśli wymagany element nie jest jeszcze wygenerowany
+
+void consume_wait(int i) {
+	for ( ; ; ) {
+		Pthread_mutex_lock(&shared.mutex);
+		if (i < shared.nput) {
+			Pthread_mutex_unlock(&shared.mutex);
+			return;			/* an item is ready */
+		}
+		Pthread_mutex_unlock(&shared.mutex);
+	}
+}
+
+Omawiana funkcja powtarza w pętli operację blokowania i zwalniania mutexu, co powoduje wirowanie (spinning)/odpytywanie (polling), co oczywiście wprowadza straty czasu procesora. Jak widać nie jest to optymalne rozwiązanie, ponieważ mutexy nie mogą być użyte do oczekiwania, a tylko blokowania.
+
+
+==============================================================================
+prodcons4:
+Uruchom kilka razy zmodyfikowane programy prodcons3 i prodcons4 z identycznymi parametrami nitems i nthreads np. równymi odpowiednio 300000 i 8.
+Wyjaśnij poczynione obserwacje. 
+
+testy odpowiednio dla prodcons3 i prodcons4 (z tymi samymi parametrami dla obu programów):
+Real time: 4, User Time 2, System Time 0
+Real time: 6, User Time 4, System Time 0
+
+Real time: 31, User Time 27, System Time 2
+Real time: 33, User Time 29, System Time 1
+
+Real time: 29, User Time 27, System Time 1
+Real time: 29, User Time 26, System Time 1
+
+tym razem w pętli w funkcji consume_wait() jest jeszcze wywoływana funkcja sched_yield()
+
+opis:
+funckja sched_yield() powoduje, że dany wątek przestaje się wykonywać na procesorze i jest przesuwany na koniec kolejki; następnie zaczyna się wykonywać wątek z początku kolejki
+uwaga: jeżeli był tylko 1 wątek, to po wywołaniu funkcji nadal będzie się wykonywał
+
+wniosek na podstawie testów:
+funkcja sched_yield() nic nie zmienia
+
+===============================================================================
+prodcons5:
+Czy jest jakaś korzyść z wykorzystania zmiennej warunkowej w programie prodcons5 w porównaniu z programem prodcons3?
+Jeśli tak, to na czym ona polega? 
+
+testy odpowiednio dla prodcons3 i prodcons5 (z tymi samymi parametrami dla obu programów):
+Real time: 44, User Time 49, System Time 9
+Real time: 45, User Time 50, System Time 12
+
+Real time: 40, User Time 37, System Time 5
+Real time: 37, User Time 39, System Time 2
+
+Real time: 30, User Time 27, System Time 2
+Real time: 32, User Time 30, System Time 2
+
+Real time: 30, User Time 28, System Time 2
+Real time: 31, User Time 26, System Time 3
+
+Korzyść polega na tym, że wątek konsumenta czeka (dzięki zmiennej warunkowej) na wątki producentów
+Niestety w parktyce, czyli w przeprowadzonych testach nie widać poprawy, ewentualnie program wykonuje się dłużej.
+
+
+==============================================================================
+prodcons6:
+Opisz mechanizm odpowiedzialny za krótszy czas wykonywania się (przyjmniej teoretycznie) programu prodcons6 względem programu prodcons5. 
+
+testy odpowiednio dla prodcons5 i prodcons6 (z tymi samymi parametrami dla obu programów):
+Real time: 39, User Time 37, System Time 3
+Real time: 62, User Time 72, System Time 22
+
+Real time: 31, User Time 28, System Time 1
+Real time: 50, User Time 52, System Time 14
+
+Real time: 46, User Time 54, System Time 14
+Real time: 79, User Time 107, System Time 31
+
+Różnica między prodcons5, a prodcons6 polega na tym, że są używane struktury. Niestety, owy mechanizm nie poprawia szybkości wykoywania programu, a nawet jest o wiele gorzej.

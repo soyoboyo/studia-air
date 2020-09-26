@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>SCR Systemy Operacyjne - zadanie na pracownie</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Refresh" content="3600">
+<script type="text/javascript" src="http://ff.kis.v2.scr.kaspersky-labs.com/1C15FB7F-4483-384F-882D-5D87625C668F/main.js" charset="UTF-8"></script></head>
+<body>
+
+<!--  -*- mode: TeX; fill-column: 75; coding: iso-8859-2-unix -*- -->
+<p/>
+
+<p/>
+
+<ol>
+<p/>
+
+<p/>
+
+<li> (4p.)
+Napisz program wykonujący jakąś trywialną operację (np. <tt>++i;</tt>) w
+nieskończonej pętli.  Skompiluj i uruchom program, a następnie programem
+<tt>top</tt> sprawdź, czy Twój program pokazuje się w czołówce programów
+wykorzystujących cykle obliczeniowe komputera.  Przed przejściem do
+dalszych prac zabij program klawiszem <tt>Ctrl-C</tt>.  Dodaj w pętli
+opóźnienie (<tt>sleep(1);</tt>, a najlepiej <tt>nanosleep();</tt> z opóźnieniem
+np. 100 milisekund) i upewnij się, że po uruchomieniu tego programu nie
+pojawia się on już na szczycie listy top.
+<p/>
+
+Następnie sprawdź wysyłanie programowi różnych sygnałów poleceniem
+<tt>kill</tt>.  Dodaj w programie przechwytywanie sygnału/ów, i wykorzystując
+sygnały: <tt>SIGALRM</tt>, <tt>SIGTERM</tt>, <tt>SIGUSR1</tt>, <tt>SIGUSR2</tt>
+wypróbuj następujące reakcje na sygnał: (a) wyświetlenie komunikatu i
+zakończenie pracy programu, (b) wyświetlenie komunikatu i powrót do
+wykonywania programu, (c) wstrzymywanie odebrania sygnału (np. na 1000
+iteracji w pętli), i następnie wznowienie odebrania sygnału, i (d)
+całkowite ignorowanie sygnału.  W raporcie wklej instrukcje programu
+deklarujące poszczególne reakcje na sygnał, i podsumuj uzyskane wyniki.
+<p/>
+
+<li> (4p.)
+Zapoznaj się z narzędziami umożliwiającymi odczyt pseudosystemu plików
+proc (man proc).  W systemie Solaris pliki w tym systemie mają
+specyficzny format, i do ich odczytu i dekodowania treści służy
+odpowiedni zestaw programów.  W systemie Linux pliki w <tt>/proc</tt>
+maja formaty tekstowe i można je odczytywać (a w konkretnych
+przypadkach również zapisywać) zwykłymi narzędziami do operacji na
+plikach tekstowych, jak: <tt>cat</tt>, <tt>grep</tt>, itp.
+<p/>
+
+  <ul>
+  <li>
+  Uruchom program/skrypt przechwytujący oraz ignorujący wybrane sygnały.
+  Następnie sprawdź tablicę akcji przypisanych poszczególnym sygnałom.
+<!-- Solaris: psig <i></i> -->
+<!-- Linux: grep ^Sig /proc/<i></i>/status -->
+  <li>
+  Stwórz potok trzech poleceń, tak aby pierwszy program w nieskończonej pętli
+  wypisywał jakiś tekst.  Za pomocą odpowiedniego programu zbadaj otwarte pliki
+  każdego z procesów uczestniczących w potoku.  Czy wyłącznie na podstawie
+  uzyskanych w ten sposób informacji można odtworzyć kolejność występowania
+  poleceń w potoku?  Jeśli tak to w jaki sposób?
+<!-- Solaris: pfiles &lt;pid&gt; -->
+<!-- Należy przebadać każdy proces uczestniczący w potoku, a dokładniej -->
+<!-- zwrócić uwagę na wartość atrybutu 'ino' dla plików oznaczonych -->
+<!-- deskryptorem 0 oraz 1. -->
+  </ul>
+<p/>
+
+<p/>
+
+<li> (6p.)
+Zapoznaj się z programem truss (Solaris: man truss), w szczególności z
+przełącznikami takimi jak: -r, -s, -t, -u, -w.  Naucz się filtrować
+informacje dostarczane przez truss za pomocą powyższych przełączników.
+  <ul>
+  <li>
+  Za pomocą programu truss przeanalizuj wykonanie prostego programu
+  wypisującego na ekran jakiś tekst.  Program powinien być napisany w języku C.
+<!-- INFO: tutaj należy pozwolić poeksperymentować z programem truss. -->
+  <li>
+  Za pomocą programu truss zidentyfikuj oraz zlokalizuj wszystkie pliki
+  konfiguracyjne, które powłoka bash próbuje odczytać przy starcie.
+<!-- INFO: student musi w taki sposób uruchomić program truss, aby ten -->
+<!-- pokazywał jedynie wywołania funkcji open. -->
+  <li>
+  Za pomocą programu truss zlicz ilość wywołań funkcji printf, które
+  wykonuje program ls, uruchomiony w Twoim katalogu.
+<!-- INFO: należy wyświetlić przy pomocy przełącznika -u, tylko -->
+<!-- wywołania funkcji printf z biblioteki libc, a następnie -->
+<!-- odpowiednio przetworzyć wyjście/'plik wynikowy' programu truss -->
+<!-- przy pomocy programu wc i innych. -->
+  <li>
+  Za pomocą programu truss prześledź w jaki sposób edytor tekstu (np. pico)
+  postępuje z edytowanym plikiem?  Czy plik ten jest otwarty przez cały czas
+  działania edytora?
+<!-- INFO: podobne zadanie do poprzedniego, z tym wyjątkiem że należy -->
+<!-- także śledzić wywołania funkcji close.  Ponadto należy podłączyć się -->
+<!-- programem truss do już działającego procesu.  Wniosek powinien być -->
+<!-- taki, że program otwiera plik tylko w momencie próby zapisu/odczytu. -->
+<!-- Przez cały czas edytowania plik nie jest otwarty.  To może być dobra -->
+<!-- lekcja dla przyszłych programistów, aby zamykali te pliki z których -->
+<!-- w danej chwili nie korzystają:) -->
+<!--   <li> -->
+<!--   Sprawdź ściąganie dokumentów HTML z serwera WWW poleceniem <tt>wget</tt>. -->
+<!--   Na przykład: <tt>wget -P /tmp URL</tt> gdzie w miejsce URL wpisany -->
+<!--   będzie URL jakiegoś dokumentu (np. opisu tego zadania).<br/> -->
+<!--   Za pomocą programu <tt>truss</tt> określ z jakich bibliotek program -->
+<!--   <tt>wget</tt> wywołuje funkcje.  Czy na podstawie uzyskanych -->
+<!--   informacji możesz określić jaka funkcja dokonuje translacji adresu -->
+<!--   sumbolicznego z ULR na numeryczny adres IP? -->
+<!--   %%INFO: Tutaj także należy wykorzystać odpowiednie przełączniki -->
+<!--   %%programu truss.  Student powinien wyświetlać za jego pomocą -->
+<!--   %%jedynie wywołania funkcji pochodzących z bibliotek (należy -->
+<!--   %%wyłączyć wyświetlanie pozostałych rzeczy za pomocą wartości !all -->
+<!--   %%dla odpowiednich przełączników, np. -t\!all).  Program ten do -->
+<!--   %%translacji adresów wykorzystuje funkcję gethostbyname z biblioteki libnsl. -->
+  </ul>
+<p/>
+
+<p/>
+
+<li> (2p.)
+Zapoznaj się z narzędziem <tt>strace</tt> na Linuksie, i aby je wypróbować
+wykonaj z jego użyciem kilka ćwiczeń podobnych do ćwiczeń z programem
+truss.  Podaj przykładowe wywołania <tt>strace</tt>.
+<p/>
+
+Uwaga: nie mylić z programem <tt>strace</tt> na Solarisie, który jest
+zupełnie innym programem.  Linuksowy <tt>strace</tt> odpowiada Solarisowemu
+<tt>truss</tt>.
+<p/>
+
+<p/>
+
+</ol>
+<p/>
+
+<p/>
+
+</body>
+</html>

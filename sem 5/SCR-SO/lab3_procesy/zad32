@@ -1,0 +1,24 @@
+#!/bin/bash
+
+fpfunction(){
+n=1
+while (($n<20))
+do
+
+        echo "Hello World-- $n times"
+        sleep 2
+        echo "Hello World2-- $n times"
+        n=$(( n+1 ))
+done
+}
+
+fork(){
+    count=0
+    while (($count<=10))
+    do
+      fpfunction &
+      count=$(( count+1 ))
+    done
+}
+
+fork

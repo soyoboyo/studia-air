@@ -1,0 +1,1 @@
+A:\Programy\PAM\PAM_uwp1\PAM_uwp1\PAM_uwp1.csproj;x86

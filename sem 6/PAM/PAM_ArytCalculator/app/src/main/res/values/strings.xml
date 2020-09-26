@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">PAM_ArytCalculator</string>
+    <string name="no_operation">brak wybranej operacji</string>
+</resources>

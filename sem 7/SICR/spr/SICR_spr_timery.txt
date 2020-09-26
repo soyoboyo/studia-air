@@ -1,0 +1,24 @@
+SICR lab
+Jacek Zalewski, 218598
+data lab: 17.10.2017
+data oddania: 07.11.2017
+
+Zad 1. Flagi
+Flagi CFLAGS itd. zostały ustawione poprawnie.
+
+Zad 2. Timer systemowy
+a)
+ustawienie wartości na 100 ms powoduje że w konsoli wyświetlają się wartości około tych wartości, analogicznie dla 10 ms i 1 ms
+
+b) funckja powodowała wyświetlnie co ustalony czas (1 sek) liczb zaczynających się od cyfry 2
+
+odpalenie obu tasków jednocześnie dawało rezultaty takie jak powinny
+1 +/- 1.....
+1 +/- 1.....
+2 +/- 2.....
+(...)
+
+pytanie sprawdzające: 
+Wyjaśnij dlaczego pierwsze zadanie (task1) wyswietla kolejne czasy swojego wywołania w przedstawiony sposób. Dlaczego odstępy czasowe pomiędzy tymi wywołaniami różnią się?
+
+Odp.: Na każdy wątek komputer stara się przydzielić taką samą ilość zasobów. A niewielkie różnice wynikają z błędu pomiaru czasu tzn. błąd czasowy nazywany opóźnieniem timera (timer latency). Wynika to z niezerowego czasu wykonywania pewnych operacji (np. restar timera).

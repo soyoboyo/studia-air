@@ -1,0 +1,1 @@
+logowanie: ssh -Y user@panamint -p 3307

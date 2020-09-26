@@ -1,0 +1,2 @@
+jeżli nie ma sleep to zwiększają się po kolei
+dać sleepy w pętle

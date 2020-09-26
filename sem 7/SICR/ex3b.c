@@ -1,0 +1,75 @@
+#include <unistd.h>
+#include <string.h>
+#include <sys/mman.h>
+#include <native/task.h>
+#include <rtdk.h>
+#include <native/sem.h>
+
+#define DATA_LEN 9
+#define BUFF_LEN 3
+
+RT_TASK reader, writer;
+RT_SEM empty, full; // obiekty semaforów
+char data[] = "Good_bad.";
+char buffer[BUFF_LEN];
+
+void writer_func(void *arg)
+{
+	int index = 0;
+	int i;
+	for (i=0; i<DATA_LEN; ++i) {	
+		buffer[index] = data[i];	
+		rt_printf("write: %c(%d) [%s]\n", buffer[index], index, buffer);
+		index = (index + 1) % BUFF_LEN;
+	}
+}
+
+void reader_func(void *arg)
+{
+	int index = 0;
+	char buf[DATA_LEN];
+	int i;
+	memset(buf, ' ', DATA_LEN);
+	for (i=0; i<DATA_LEN; ++i) {
+		buf[i] = buffer[index];
+		rt_printf("\t\t\tread: %c(%d) [%s]\n", buffer[index], index, buf);
+		index = (index + 1) % BUFF_LEN;
+	}
+}
+
+int main(int argc, char *argv[])
+{
+	// inicjalizacja semaforów
+	int read = rt_sem_create(&empty, "readerSemaphore", BUFF_LEN, S_FIFO);
+	int write = rt_sem_create(&full, "writerSemaphore", 0, S_FIFO);
+	
+	rt_print_auto_init(1);
+	mlockall(MCL_CURRENT | MCL_FUTURE);
+
+	rt_task_spawn(&reader, "reader", 0, 0, T_JOINABLE, &reader_func, NULL);
+	rt_task_spawn(&writer, "writer", 0, 0, T_JOINABLE, &writer_func, NULL);
+	
+	for(int i = 0; i < BUFF_LEN; i++){
+		// otoczenie semaforami sekcji krytycznej
+		rt_sem_p(&empty, 0); 
+		
+		rt_task_join(&reader); // odczytywanie stron
+		
+		rt_sem_v(&empty);
+		rt_task_sleep(100000); // dodano opoznienie
+		
+		
+		rt_sem_p(&full, 0);
+		
+		rt_task_join(&writer); // pisanie stron
+		
+		rt_sem_v(&full);
+		rt_task_sleep(100000); // dodano opoznienie
+	}
+		
+	rt_sem_delete(&empty);
+	rt_sem_delete(&full);
+		
+	return 0;
+}
+

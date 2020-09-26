@@ -1,0 +1,13 @@
+1. Atrybuty procesów
+2. Atrybuty plików
+3. Podać parametry funkcji tworzącej kolejkę POSIX
+4. Po jakich działaniach rozpocznie się mechanizm szeregowania w systemie?
+5. Semafor jakaś funckja i napisać co się dzieje dla >0 i <0
+6. Szeregowanie karuzelowe i FIFO (po 2 myślniki do każdego, chyba w jakich sytuacjach one będą np. gdy proces się zakonczy/zwolni zasoby lub gdy proces zostanie wywłaszczony)
+7. Wymagania do bezpiecznego systemu czasu rzeczywistego (np. szeregowanie zadań)
+8. Jakie funkcje kolejno wykona klient i serwer (to samo co zad 9 z pdfa: "kolokwiaprogwsb.pdf")
+9. Co zwraca funkcja fork() w 
+a) procesie macierzystym: PID procesu potomnego lub -1 (błąd)
+b) procesie potomnym 0
+10. Ograniczenia ustawia się na takie zasoby jak:
+(4 myślniki, np: czas procesu, pamięć operacyjna itp.)

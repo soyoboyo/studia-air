@@ -1,0 +1,26 @@
+wnukówka 1
+1.1 W jakich przypadkach próba odczytu danych z pustego potoku kończy się powrotem funkcji READ z wartością 0, a kiedy oczekiwaniem na dalsze dane?
+1.2 W jakich przypadkach otrzymywanie sygnału przez proces nie kończy się śmiercią procesu?
+1.3 Kiedy proces może być zombie?
+1.4 Co wymaga synchronizacji z np. semaforem, a które nie: potoki, kolejki komunikató, pamięć wspólna
+
+wnukówka 2
+Narysuj diagram czasowy dla
+T	r	e	p
+T1	1	1	1
+T2	1	3	5
+algorytmy: EDF Z/bez wyłaszczania, RMS z/bez wyłaszczania
+
+wnukówka 3
+3.1 Podzielona obsługa przerwań? powody i korzyści
+3.2 mikro/nano jądra i system operacyjny, różnice i zalety
+3.3 Usługi zarządzania pamięcią? Czy i dlaczego RTOS powinien dostarczy?
+3.4 Kiedy występuje inwersja priorytetów? Jaki system operacyjny może jej zapobiec?
+
+wnukówka 4
+4.1 wryfikacja, a walidacja
+4.2 błąd, a defekt
+4.3 kloc, a zł. cyklometryczna
+4.4 redundancja
+
+wnukówka 5

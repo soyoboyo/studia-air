@@ -1,0 +1,41 @@
+wejść tu:
+cd /usr/local/xenomai
+skopiować sobie obraz xenomaja:
+cp xmai-pub.qcow2 xmai-login.qcow2
+
+stawianie xenomaja:
+kvm -k en-us -net nic -net user -hda nazwa_pliku -redir tcp:XXXX::22 -monitor none -display none -vga none -daemonize
+
+logowanie:
+ssh user@panamint -p XXXX
+dodać parametr -X lub -Y
+panamint.ict.pwr.wroc.pl
+
+ustawianie flag:
+XENOCONFIG=/usr/xenomai/bin/xeno-config
+CFLAGS=`/usr/xenomai/bin/xeno-config --skin=native --cflags`
+LDFLAGS=`/usr/xenomai/bin/xeno-config --skin=native --ldflags`
+
+
+
+kompilacja: 
+gcc $CFLAGS $LDFLAGS -lrtdk ex.c -o main -lnative
+
+retart powłowki:
+source .bashrc
+
+
+jeszcze trzeba coś weksportować
+
+=========================
+PANDABOARD
+numer 116
+najpierw na panaminta, a potem
+ssh user@156.17.9.XXX gdzie XXX to numer karty pandy
+
+wszystko trzeba robić na roocie
+sudo su
+
+potem wyesportować XCFG i flagi
+
+

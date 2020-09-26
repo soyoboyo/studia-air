@@ -1,0 +1,21 @@
+2.2 SLEEP_TIME
+a)
+ustawienie wartości na 100 ms powoduje że w konsoli wyświetlają się wartości około tych wartości, analogicznie dla 10 ms i 1 ms
+
+b) funckja powodowała wyświetlnie co ustalony czas (1 sek) liczb zaczynających się od cyfry 2
+
+a + b
+odpalenie obu tasków jednocześnie dawało rezultaty takie jak powinny
+1 +/- 1.....
+1 +/- 1.....
+2 +/- 2.....
+
+pytanie sprawdzające: 
+chodzi o to, że na każdy wątek komputer stara się przydzielić taką samą ilość zasobów
+
+pdf3
+teleturniej
+program nie działa poprawnie
+dodano bilbiotekę <native/mutex.h> oraz wywołano funkcję rt_mutex_create(...) czyli utworzono mute
+mutex musi być globalną zmienną
+w mainie tworzyć wątki i przy spamowaniu mamy podawać funckję

@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Systemy informatyczne czasu rzeczywistego - zadanie na pracownie</title>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-2">
+<meta http-equiv="Refresh" content="3600">
+<script type="text/javascript" src="http://ff.kis.v2.scr.kaspersky-labs.com/EEB738AA-D96E-C342-9C17-DCE1C747A81F/main.js" charset="UTF-8"></script></head>
+<body>
+
+<!--  -*- mode: TeX; fill-column: 75 -*- -->
+<!--  -->
+<p>
+
+Celem ćwiczenia jest zapoznanie się z działaniem mechanizmów szeregowania
+systemu Xenomai i związkiem z synchronizacją zadań.
+</p><p>
+
+Zad.1.<br>
+Napisz program tworzący trzy wątki operujące na wspólnej zmiennej globalnej licz
+</p><ul>
+<li> wątki numer 1 i 2 --- w pętli dwudziestokrotnie zwiększa wartość 
+zmiennej globalnej licz w następujący sposób: przepisuje zawartość licz 
+do zmiennej lokalnej, zwiększa wartość tej zmiennej o jeden, przepisuje 
+wartość zmiennej lokalnej do zmiennej globalnej licz,
+</li><li> wątek numer 3 --- w pętli dwudziestokrotnie zwiększa wartość 
+zmiennej globalnej licz w następujący sposób: bezpośrednio zwiększa 
+wartość zmiennej globalnej licz o jeden
+</li></ul>
+Proszę zaobserwować czy zawartość zmiennej globalnej licz ma odpowiednią wartość. Każdy wątek powinien mieć unikatową nazwę.<br>
+Co oznacza otrzymany wynik?
+<p>
+
+</p><p>
+
+Zad.2.<br>
+W funkcji <tt>rt_task_create</tt> ustaw priorytety kolejno uruchamianych
+zadań na stopniowo coraz wyższe.  Jaką zmianę to powoduje?
+</p><p>
+
+</p><p>
+
+Zad.3.<br>
+Dodaj w pętli zadaniowej wszystkich wątków minimalne
+opóźnienia <tt>rt_task_sleep</tt> między wszystkimi krokami, aby umożliwić
+interakcje między zadaniami.  Ustal eksperymentalnie minimalną wielkość
+opóźnienia pozwalającą na przełączanie wątków.  Upewnij się w jakich
+jednostkach jest ono wyznaczone (nanosekundy lub jiffies).
+Sprawdź otrzymany wynik na zmiennej globalnej licz.
+</p><p>
+
+</p><p>
+
+Zad.4.<br>
+Zmodyfikuj program w taki sposób, żeby ochronić muteksem operacje na zmiennej globalnej licz.
+Opisz uzyskany wynik
+</p><p>
+
+
+
+</p></body></html>

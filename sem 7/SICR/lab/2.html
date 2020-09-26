@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<title>Systemy informatyczne czasu rzeczywistego - zadanie na pracownie</title>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-2">
+<meta http-equiv="Refresh" content="3600">
+<script type="text/javascript" src="http://ff.kis.v2.scr.kaspersky-labs.com/1C15FB7F-4483-384F-882D-5D87625C668F/main.js" charset="UTF-8"></script></head>
+<body>
+
+<!--  -*- mode: TeX; fill-column: 75 -*- -->
+<!--  -->
+<p>
+
+Celem ćwiczenia jest zapoznanie się z maszyną wirtualną kvm.
+</p><p>
+
+1. Wykonaj własną kopię wirtualnego dysku maszyny wirtualnej wskazanej
+przez prowadzącego w katalogu przewidzianym do pracy z maszynami wirtualnymi.
+Zwróć uwagę, by nadać plikowi czytelną nazwę i ustawić prawa dostępu tak,
+by inni użytkownicy nie mogli zczytać dysku maszyny.
+</p><p>
+
+2. Wystartuj maszynę w trybie okienkowym, zaloguj sie na konto root, zmień je.
+Utwórz konto zwykłego użytkownika systemu Linux (polecenie useradd).
+Zaloguj się na konto tego użytkownika, również ustaw jego hasło i pracuj
+wyłącznie na tym koncie (z wyjątkiem doraźnych prac administracyjnych na
+maszynie wirtualnej).
+</p><p>
+
+Przećwicz startowanie i wyłączanie maszyny wirtualnej (sudo poweroff).
+Zwróć uwagę, że zwykłe zamknięcie okienka maszyny jest niepoprawne, bo
+odpowiada odcięciu prądu do komputera.  Po restarcie maszyna system
+operacyjny wykrywa niepoprawne wyłączenie i uruchamia procedurę sprawdzania
+spójności systemu plików, która działa tylko w trybie okienkowym.
+</p><p>
+
+W raporcie podaj dokładnie polecenie uruchamiania maszyny wirtualnej w
+trybie okienkowym i procedurę jej wyłączania.
+</p><p>
+
+3. Włącz się na swoją maszynę, i z jej wnętrza przećwicz kopiowanie plików
+użytkownika z i do swojego katalogu na panamincie.
+</p><p>
+
+W raporcie podaj polecenia kopiowania plików w jedną i drugą stronę.
+</p><p>
+
+4. Uważnie przeczytaj instrukcje przekierowania portu sieciowego, wybierz
+swój własny unikalny numer portu sieciowego (1024..65535), i odpal maszynę
+z przekierowaniem jej portu ssh (22) na wybrany numer portu panaminta.
+Wejdź na maszynę przez ssh używając wybranego numeru portu.  Przećwicz
+procedurę poprawnego zdalnego gaszenia maszyny.
+</p><p>
+
+W raporcie podaj:<br>
+(a) polecenie uruchamiania maszyny w trybie bezokienkowym z przekierowaniem portu,<br>
+(b) polecenie ssh wejścia do maszyny,<br>
+(c) procedurę wyłączania maszyny.
+</p><p>
+
+5. Uruchom swoją maszynę w trybie bezokienkowym, i bez wchodzenia do
+maszyny przećwicz kopiowanie plików ze swojego katalogu na panamincie do
+maszyny i z powrotem.
+</p><p>
+
+W raporcie podaj polecenia kopiowania plików z poziomu panaminta w obie strony.
+</p><p>
+
+6. Uruchom swoją maszynę w trybie bezokienkowym, wejdź do niej przez ssh i
+wypróbuj jeden wybrany edytor tekstu (vi, emacs, nano, lub inny jaki na
+niej znajdziesz).  Sprawdź możliwość pracy tym edytorem z krótkimi plikami
+typu programów opracowanych na poprzednim ćwiczeniu.
+</p><p>
+
+W raporcie podaj jakiego edytora użyłeś/użyłaś i krótko oceń swoją
+sprawność w posługiwaniu się tym edytorem.
+</p><p>
+
+7. Zadanie domowe:
+</p><p>
+
+Z zewnętrznego komputera połącz się z panamintem przez ssh.  Nie
+korzystaj z systemu okienkowego (nie używaj opcji -X ani -Y programu
+ssh, a zamiast nich użyj opcji -x (małe x)).  W systemie Windows
+konieczne będzie skorzystanie z programu takiego jak putty.  Aby
+wyłączyć połączenie systemu okienkowego w systemie Windows wystarczy
+nieuruchamiać żadnego serwera ekranowego (jeśli nie wiesz co to jest
+to najpewniej nie masz go uruchomionego).  Można również w
+ustawieniach programu putty znaleźć ustawienia tuneli, i wyłączyć
+(dezaktywować) tunel X Window (port 6000).
+</p><p>
+
+Po połączeniu się z panamintem, uruchom swoją maszynę wirtualną w
+trybie demona, z przekierowaniem portu ssh (22), używając wcześniej
+przedstawionych poleceń z przekierowaniem portów sieciowych.
+</p><p>
+
+Następnie wejdź do maszyny i sprawdź, że możesz na niej pracować,
+korzystając wyłącznie z programów tekstowych, w tym z edytora tekstowego
+opanowanego poprzednio.  Rozłącz się z maszyną wirtualną nie wyłączając
+jej, rozłącz się z panamintem, a następnie połącz się z nim ponownie, i
+ponownie wejdź do uruchomionej wcześniej maszyny, sprawdzając, że nadal
+możesz na niej pracować.
+</p><p>
+
+W raporcie potwierdź pomyślne wykonanie zadania domowego.
+</p><p>
+
+
+
+</p></body></html>

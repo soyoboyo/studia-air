@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PAMSI_9_Statki.Pole">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAIAAAAAAAAAAAAAAAAAAAAAAAAEAECABgAAAAAAQ=</HashCode>
+      <FileName>Pole.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PAMSI_9_Statki.Statek">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAABACAAAABAEAAAAAAAABIAAAAAACAAgAAAAAAAAA=</HashCode>
+      <FileName>Statek.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PAMSI_9_Statki.UI">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <Members>
+      <Method Name="button1_Click" Hidden="true" />
+      <Method Name="Dispose" Hidden="true" />
+      <Method Name="GetRowColIndex" Hidden="true" />
+      <Method Name="InitializeComponent" Hidden="true" />
+      <Field Name="label1" Hidden="true" />
+      <Field Name="label10" Hidden="true" />
+      <Method Name="label10_Click" Hidden="true" />
+      <Field Name="label11" Hidden="true" />
+      <Method Name="label11_Click" Hidden="true" />
+      <Field Name="label12" Hidden="true" />
+      <Method Name="label12_Click" Hidden="true" />
+      <Field Name="label13" Hidden="true" />
+      <Method Name="label13_Click" Hidden="true" />
+      <Field Name="label14" Hidden="true" />
+      <Method Name="label14_Click" Hidden="true" />
+      <Field Name="label15" Hidden="true" />
+      <Method Name="label15_Click" Hidden="true" />
+      <Field Name="label16" Hidden="true" />
+      <Field Name="label2" Hidden="true" />
+      <Field Name="label3" Hidden="true" />
+      <Field Name="label4" Hidden="true" />
+      <Field Name="label5" Hidden="true" />
+      <Field Name="label6" Hidden="true" />
+      <Field Name="label7" Hidden="true" />
+      <Field Name="label8" Hidden="true" />
+      <Field Name="label9" Hidden="true" />
+      <Field Name="menuStrip1" Hidden="true" />
+      <Field Name="opcjeToolStripMenuItem" Hidden="true" />
+      <Field Name="panel1" Hidden="true" />
+      <Field Name="panel2" Hidden="true" />
+      <Field Name="panel3" Hidden="true" />
+      <Field Name="pokażStatkiToolStripMenuItem" Hidden="true" />
+      <Field Name="pomocToolStripMenuItem" Hidden="true" />
+      <Method Name="pomocToolStripMenuItem_Click" Hidden="true" />
+      <Field Name="radioButton1" Hidden="true" />
+      <Method Name="radioButton1_CheckedChanged" Hidden="true" />
+      <Field Name="radioButton2" Hidden="true" />
+      <Method Name="radioButton2_CheckedChanged" Hidden="true" />
+      <Field Name="restartToolStripMenuItem" Hidden="true" />
+      <Method Name="restartToolStripMenuItem_Click" Hidden="true" />
+      <Field Name="startToolStripMenuItem" Hidden="true" />
+      <Method Name="startToolStripMenuItem_Click" Hidden="true" />
+      <Field Name="tableLayoutPanel1" Hidden="true" />
+      <Method Name="tableLayoutPanel1_CellPaint" Hidden="true" />
+      <Method Name="tableLayoutPanel1_Click" Hidden="true" />
+      <Field Name="tableLayoutPanel2" Hidden="true" />
+      <Method Name="tableLayoutPanel2_CellPaint" Hidden="true" />
+      <Method Name="tableLayoutPanel2_Click" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>9wAEIgASCDBABBABAAHQAAACAAYKAAQAJNhngYAAgCI=</HashCode>
+      <FileName>UI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PAMSI_9_Statki.Zestaw">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ggAAAAQAQAAIAAAAAAAAAQEgEECQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Zestaw.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

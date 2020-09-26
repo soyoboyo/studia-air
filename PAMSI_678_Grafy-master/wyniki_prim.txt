@@ -1,0 +1,60 @@
+Graf: 10, procent gestosci: 25%.
+Lista: 0.00209686 s
+Macierz: 0.00220871 s
+Graf: 10, procent gestosci: 50%.
+Lista: 0.00251671 s
+Macierz: 0.00253876 s
+Graf: 10, procent gestosci: 75%.
+Lista: 0.00280304 s
+Macierz: 0.0029208 s
+Graf: 10, procent gestosci: 100%.
+Lista: 0.00305392 s
+Macierz: 0.00341508 s
+Graf: 50, procent gestosci: 25%.
+Lista: 0.00969464 s
+Macierz: 0.0156359 s
+Graf: 50, procent gestosci: 50%.
+Lista: 0.0181605 s
+Macierz: 0.0287377 s
+Graf: 50, procent gestosci: 75%.
+Lista: 0.0264195 s
+Macierz: 0.041929 s
+Graf: 50, procent gestosci: 100%.
+Lista: 0.0371736 s
+Macierz: 0.0477556 s
+Graf: 100, procent gestosci: 25%.
+Lista: 0.0350295 s
+Macierz: 0.0793692 s
+Graf: 100, procent gestosci: 50%.
+Lista: 0.0738939 s
+Macierz: 0.170185 s
+Graf: 100, procent gestosci: 75%.
+Lista: 0.112668 s
+Macierz: 0.25056 s
+Graf: 100, procent gestosci: 100%.
+Lista: 0.152514 s
+Macierz: 0.256009 s
+Graf: 500, procent gestosci: 25%.
+Lista: 1.11612 s
+Macierz: 6.89907 s
+Graf: 500, procent gestosci: 50%.
+Lista: 2.57973 s
+Macierz: 17.8786 s
+Graf: 500, procent gestosci: 75%.
+Lista: 4.12303 s
+Macierz: 22.303 s
+Graf: 500, procent gestosci: 100%.
+Lista: 6.1304 s
+Macierz: 18.4169 s
+Graf: 1000, procent gestosci: 25%.
+Lista: 6.08199 s
+Macierz: 52.6124 s
+Graf: 1000, procent gestosci: 50%.
+Lista: 14.5413 s
+Macierz: 138.771 s
+Graf: 1000, procent gestosci: 75%.
+Lista: 25.4975 s
+Macierz: 175.531 s
+Graf: 1000, procent gestosci: 100%.
+Lista: 36.8068 s
+Macierz: 136.825 s

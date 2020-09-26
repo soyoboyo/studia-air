@@ -1,0 +1,162 @@
+Rozmiar tablic: 10000, procent posortowania: 0%.
+Czas sortowania: 2.13386 s
+Czas sredni dla 1 tablicy: 0.0213386 s
+
+Rozmiar tablic: 10000, procent posortowania: 25%.
+Czas sortowania: 2.07042 s
+Czas sredni dla 1 tablicy: 0.0207042 s
+
+Rozmiar tablic: 10000, procent posortowania: 50%.
+Czas sortowania: 2.09173 s
+Czas sredni dla 1 tablicy: 0.0209173 s
+
+Rozmiar tablic: 10000, procent posortowania: 75%.
+Czas sortowania: 2.12367 s
+Czas sredni dla 1 tablicy: 0.0212367 s
+
+Rozmiar tablic: 10000, procent posortowania: 95%.
+Czas sortowania: 2.16977 s
+Czas sredni dla 1 tablicy: 0.0216977 s
+
+Rozmiar tablic: 10000, procent posortowania: 99%.
+Czas sortowania: 2.14704 s
+Czas sredni dla 1 tablicy: 0.0214704 s
+
+Rozmiar tablic: 10000, procent posortowania: 99.7%.
+Czas sortowania: 2.15247 s
+Czas sredni dla 1 tablicy: 0.0215247 s
+
+Rozmiar tablic: 10000, procent posortowania: 100%.
+Czas sortowania: 2.14414 s
+Czas sredni dla 1 tablicy: 0.0214414 s
+
+Rozmiar tablic: 50000, procent posortowania: 0%.
+Czas sortowania: 12.2147 s
+Czas sredni dla 1 tablicy: 0.122147 s
+
+Rozmiar tablic: 50000, procent posortowania: 25%.
+Czas sortowania: 12.3047 s
+Czas sredni dla 1 tablicy: 0.123047 s
+
+Rozmiar tablic: 50000, procent posortowania: 50%.
+Czas sortowania: 12.4246 s
+Czas sredni dla 1 tablicy: 0.124246 s
+
+Rozmiar tablic: 50000, procent posortowania: 75%.
+Czas sortowania: 12.4779 s
+Czas sredni dla 1 tablicy: 0.124779 s
+
+Rozmiar tablic: 50000, procent posortowania: 95%.
+Czas sortowania: 12.5281 s
+Czas sredni dla 1 tablicy: 0.125281 s
+
+Rozmiar tablic: 50000, procent posortowania: 99%.
+Czas sortowania: 12.5315 s
+Czas sredni dla 1 tablicy: 0.125315 s
+
+Rozmiar tablic: 50000, procent posortowania: 99.7%.
+Czas sortowania: 12.577 s
+Czas sredni dla 1 tablicy: 0.12577 s
+
+Rozmiar tablic: 50000, procent posortowania: 100%.
+Czas sortowania: 12.561 s
+Czas sredni dla 1 tablicy: 0.12561 s
+
+Rozmiar tablic: 100000, procent posortowania: 0%.
+Czas sortowania: 25.9952 s
+Czas sredni dla 1 tablicy: 0.259952 s
+
+Rozmiar tablic: 100000, procent posortowania: 25%.
+Czas sortowania: 26.2778 s
+Czas sredni dla 1 tablicy: 0.262778 s
+
+Rozmiar tablic: 100000, procent posortowania: 50%.
+Czas sortowania: 26.4148 s
+Czas sredni dla 1 tablicy: 0.264148 s
+
+Rozmiar tablic: 100000, procent posortowania: 75%.
+Czas sortowania: 26.5886 s
+Czas sredni dla 1 tablicy: 0.265886 s
+
+Rozmiar tablic: 100000, procent posortowania: 95%.
+Czas sortowania: 26.9208 s
+Czas sredni dla 1 tablicy: 0.269208 s
+
+Rozmiar tablic: 100000, procent posortowania: 99%.
+Czas sortowania: 26.826 s
+Czas sredni dla 1 tablicy: 0.26826 s
+
+Rozmiar tablic: 100000, procent posortowania: 99.7%.
+Czas sortowania: 27.513 s
+Czas sredni dla 1 tablicy: 0.27513 s
+
+Rozmiar tablic: 100000, procent posortowania: 100%.
+Czas sortowania: 26.9453 s
+Czas sredni dla 1 tablicy: 0.269453 s
+
+Rozmiar tablic: 500000, procent posortowania: 0%.
+Czas sortowania: 154.153 s
+Czas sredni dla 1 tablicy: 1.54153 s
+
+Rozmiar tablic: 500000, procent posortowania: 25%.
+Czas sortowania: 157.041 s
+Czas sredni dla 1 tablicy: 1.57041 s
+
+Rozmiar tablic: 500000, procent posortowania: 50%.
+Czas sortowania: 157.457 s
+Czas sredni dla 1 tablicy: 1.57457 s
+
+Rozmiar tablic: 500000, procent posortowania: 75%.
+Czas sortowania: 153.551 s
+Czas sredni dla 1 tablicy: 1.53551 s
+
+Rozmiar tablic: 500000, procent posortowania: 95%.
+Czas sortowania: 157.305 s
+Czas sredni dla 1 tablicy: 1.57305 s
+
+Rozmiar tablic: 500000, procent posortowania: 99%.
+Czas sortowania: 152.086 s
+Czas sredni dla 1 tablicy: 1.52086 s
+
+Rozmiar tablic: 500000, procent posortowania: 99.7%.
+Czas sortowania: 156.389 s
+Czas sredni dla 1 tablicy: 1.56389 s
+
+Rozmiar tablic: 500000, procent posortowania: 100%.
+Czas sortowania: 155.795 s
+Czas sredni dla 1 tablicy: 1.55795 s
+
+Rozmiar tablic: 1000000, procent posortowania: 0%.
+Czas sortowania: 333.271 s
+Czas sredni dla 1 tablicy: 3.33271 s
+
+Rozmiar tablic: 1000000, procent posortowania: 25%.
+Czas sortowania: 334.775 s
+Czas sredni dla 1 tablicy: 3.34775 s
+
+Rozmiar tablic: 1000000, procent posortowania: 50%.
+Czas sortowania: 336.198 s
+Czas sredni dla 1 tablicy: 3.36198 s
+
+Rozmiar tablic: 1000000, procent posortowania: 75%.
+Czas sortowania: 340.076 s
+Czas sredni dla 1 tablicy: 3.40076 s
+
+Rozmiar tablic: 1000000, procent posortowania: 95%.
+Czas sortowania: 334.853 s
+Czas sredni dla 1 tablicy: 3.34853 s
+
+Rozmiar tablic: 1000000, procent posortowania: 99%.
+Czas sortowania: 360.903 s
+Czas sredni dla 1 tablicy: 3.60903 s
+
+Rozmiar tablic: 1000000, procent posortowania: 99.7%.
+Czas sortowania: 414.298 s
+Czas sredni dla 1 tablicy: 4.14298 s
+
+Rozmiar tablic: 1000000, procent posortowania: 100%.
+Czas sortowania: 338.735 s
+Czas sredni dla 1 tablicy: 3.38735 s
+
+
+Suma czasow sortowania: 4367.02

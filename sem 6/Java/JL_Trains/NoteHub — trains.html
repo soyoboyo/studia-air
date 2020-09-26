@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>NoteHub — Wprowadzenie</title>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script async="" src="NoteHub%20%E2%80%94%20trains_pliki/analytics.js"></script><script src="NoteHub%20%E2%80%94%20trains_pliki/cNMhBupGZkNx_J3bPzAgXe1nMwU.js"></script><link href="NoteHub%20%E2%80%94%20trains_pliki/style.css" rel="stylesheet" type="text/css">
+<script src="NoteHub%20%E2%80%94%20trains_pliki/note.js"></script>
+</head>
+<body>
+<article>
+<h3>Wprowadzenie</h3>
+<p>Otrzymałeś zlecenie na napisanie systemu wyszukiwania połączeń 
+pomiędzy miastami od nowego przewoźnika kolejowego. System musi wyszukać
+ najkrótszą drogę pomiędzy dwoma miastami. Zleceniodawcy zależy, aby 
+wyszukiwanie było jak najszybsze.</p>
+<h2>Zadanie</h2>
+<ol>
+<li>Napisz serwis API zgodnie z dokumentacją,</li>
+<li>Napisz testy automatyczne dla obu endpointów,</li>
+<li>Zadanie może zostać wykonane z użyciem dowolnej technologii,</li>
+<li>Użyj Gita do udokumentowania historii projektu,</li>
+<li>Logowanie nie jest wymagane</li>
+</ol>
+<h1>Dokumentacja</h1>
+<h2>Add train</h2>
+<p>Endpoint do dodawania połączenia kolejowego. Dodanie połączenia Wrocław -&gt; Warszawa <strong>nie</strong> oznacza, że istnieje połączenie Warszawa -&gt; Wrocław.</p>
+<p><strong>HTTP REQUEST</strong> <code>POST http://example.com/api/trains</code>
+<strong>JSON Payload:</strong></p>
+<pre><code>{
+  "train": ["Poznań", "Wadowice"]
+}
+</code></pre>
+<p><strong>Walidacje:</strong></p>
+<ul>
+<li>Trasa jest unikalna - nie można dodać dwa razy tej samej,</li>
+<li>Nie można dodać trasy A-&gt;A.
+W każdym scenariuszu serwer powinien zwrócić odpowiedni status HTTP.</li>
+</ul>
+<hr>
+<h2>Find shortest route</h2>
+<p>Endpoint do wyszukiwania najkrótszej trasy pomiędzy dwoma miastami. Zwraca wiele tras jeśli mają tę samą długość.</p>
+<p><strong>HTTP REQUEST</strong> <code>GET http://example.com/api/shortest_route?start=START&amp;destination=DESTINATION</code></p>
+<p><strong>Request params:</strong></p>
+<pre><code>{
+  "start": "Poznań",
+  "destination": "Wadowice"
+}
+</code></pre>
+<p><strong>JSON Response:</strong></p>
+<pre><code>{
+  "routes": [
+    [
+      "Poznań",
+      "Wrocław",
+      "Wadowice"
+    ],
+    [
+      "Poznań",
+      "Łódź",
+      "Wadowice"
+    ]
+  ],
+  "distance": 2
+}
+</code></pre>
+<p>Jeśli połączenie między miastami nie istnieje, aplikacja zwraca status 404.</p>
+<h3>Dodatkowe punkty za:</h3>
+<ul>
+<li>jak najlepiej zoptymalizowany algorytm (szybkość i potrzebne zasoby),</li>
+<li>implementację systemu cachingu (dla ułatwienia cache kasowany przy dodaniu pociągu)</li>
+<li>użycie nierelacyjnej bazy danych</li>
+</ul>
+</article>
+<footer>
+<a href="https://notehub.org/">⌂ notehub</a> ·
+<a href="https://notehub.org/r6blk/stats">stats</a> ·
+<a href="https://notehub.org/r6blk/edit">edit</a> ·
+<a href="https://notehub.org/r6blk/export">export</a> ·
+<a href="javascript:void(0)" onclick='report("r6blk")'>report abuse</a> ·
+<a href="https://notehub.org/TOS.md">tos</a>
+</footer>
+
+
+</body></html>

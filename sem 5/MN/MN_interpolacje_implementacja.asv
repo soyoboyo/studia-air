@@ -1,0 +1,57 @@
+clear all; clc;
+set(0,'defaultfigurecolor',[1 1 1]); % ustawienie bialego tla na wykresach
+% przyklad z wykladu
+%x = [10 20 30 40 50];
+%y = [0.98 0.93 0.86 0.76 0.64];
+
+x = [0 1 2 3 4 5 5.5 6 7 ];
+y = [1 4 1 5 3 5 3 2 0 ];
+pkt = 3.5; % w punkcie x = 23
+
+
+funkcja = [1 -1.55 +0.295 + 0.3725 -0.12625 + 0.00875];
+xf = [-1 
+yf = [
+pktf = 
+
+%% Interpolacja wielomianowa Lagrange'a
+
+[wielomian, A] = MN_Lagrange(x, y);
+
+wartosc = polyval(wielomian, pkt); % wartosc funkcji w punkcie pkt
+
+%% Interpolacja metoda roznic skonczonych
+
+[wielomian2, B] = MN_ilorazy(x, y);
+
+wartosc2 = polyval(wielomian2, pkt); % wartosc funkcji w punkcie pkt
+
+wielomian
+wielomian2
+
+wartosc
+wartosc2
+
+
+
+
+
+
+
+
+
+%% wykresy
+
+% t = 0:0.05:70;
+% v = linspace(0, 7);
+% g = polyval(wielomian, t);
+% 
+%  figure(1);
+%  hold on; grid on; grid minor;
+%  title(['Wielomian interpolacyjny']);
+%  xlabel('x'); ylabel('f(x)');
+%  plot(v, polyval(wielomian, v));
+% for i = 1:length(x)
+%     plot(x(i), y(i), '*');
+% end
+% plot(pkt, wartosc, 'o');

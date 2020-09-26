@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Czlowiek">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAEAAAAAQAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Czlowiek.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Matka">
+    <Position X="0.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>hAAAEAAAAAAIAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Matka.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ojciec">
+    <Position X="5.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAgAAAAAAAAIAEAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Ojciec.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Syn">
+    <Position X="3" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAEAIAAAACAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Syn.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Wnuk">
+    <Position X="3" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAgAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Wnuk.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

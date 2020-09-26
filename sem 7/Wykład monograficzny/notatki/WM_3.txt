@@ -1,0 +1,4 @@
+Wykład monograficzny 3
+po co znać kolejność topologiczną?
+co to jest ścieżka krytyczna?
+jak zmniejszyć czas dostarczenia? wyrzucić zadanie krytyczne przed blok, za blok albo na inną maszynę
